@@ -1,0 +1,994 @@
+\documentclass[12pt]{report}
+    \title{\textbf{Prácticos\\ Redes y Sistemas Distribuidos}}
+    \author{Agustín M. Domínguez, Valentina S. Vispo}
+    \date{Dic 2022}
+    
+    \addtolength{\topmargin}{-1cm}
+    \addtolength{\textheight}{3cm}
+    \usepackage[a4paper, total={6.8in, 9.2in}]{geometry}
+    \usepackage{MnSymbol}
+    \usepackage{amsmath}
+    \usepackage{afterpage}
+    \usepackage{titlesec}
+    \usepackage{graphicx}
+    \usepackage{inconsolata}
+    \usepackage{listings}
+	\graphicspath{ {./images/} }
+	\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{Práctico \thechapter:}{1em}{}
+	
+%	\titleformat{\section}[hang]{\normalfont\large\bfseries}{\noindent\thesection}{1em}{}
+    
+\begin{document}
+
+\newcommand{\addim}[1]{\includegraphics[width=\textwidth]{#1}}
+\newcommand{\note}[1]{{\footnotesize {\textbf{#1}}}}
+\newcommand{\hnote}[1]{\note{#1}\hfill\break}
+\newcommand{\p}{\paragraph}
+\newcommand{\sone}{\textdaggerdbl}
+\newcommand{\stwo}{\textdaggerdbl \textdaggerdbl}
+\newcommand{\sthree}{\textdaggerdbl \textdaggerdbl \textdaggerdbl}
+\newcommand{\cd}[1]{\texttt{#1}}
+\newcommand{\sfour}{\textdaggerdbl \textdaggerdbl \textdaggerdbl \textdaggerdbl}
+\newcommand{\sfive}{\textcurrency}
+\newcommand{\shard}{$\bigstar$}
+\newcommand{\bb}[1]{\textbf{#1}}
+\newenvironment{exer}{\noindent\begin{minipage}{\textwidth}}{\end{minipage}\ \hfill \break}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Referencia de Unidades}
+
+En toda la materia incluyendo estos prácticos, se usan las siguientes convenciones para las unidades:
+
+\begin{itemize}
+\item \bb{$b$} siempre es $bits$
+\item \bb{$B$} siempre es $bytes$, es decir 1 B = 8 b
+\item \bb{$bps$} es bits por segundo, es decir $1\ bps = 1 \frac{b}{s}$
+\item Cuando escribimos \bb{KB} (y  cuando nos referimos a la unidad \bb{KiB} (kibibyte) del SIMELA
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|| c c || c || c c ||} 
+ \hline
+ valor & bits & Prefix & bytes & valor \\ [0.2ex] 
+ \hline\hline
+ $10^{3}$b & Kb & Kilo & KB & $2^{10}$B \\ 
+ \hline
+  $10^{6}$b & Mb & Mega & MB & $2^{20}$B \\ 
+ \hline
+   $10^{9}$b & Gb & Giga & GB & $2^{30}$B \\ 
+ \hline
+   $10^{12}$b & Tb & Tera & TB & $2^{40}$B \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|| c | c | c ||} 
+ \hline
+ Prefix & Exp & Valor \\ [0.2ex] 
+ \hline\hline
+ pico [p] & $10^{-12}$ & 0.000000000001 \\ 
+ \hline
+ nano [n] & $10^{-9}$ & 0.000000001 \\
+ \hline
+ micro [$\mu$] & $10^{-6}$ & 0.000001 \\
+ \hline
+  milli [m] & $10^{-3}$ & 0.001 \\
+ \hline
+ - & $10^{0}$ & 1 \\
+ \hline
+ Kilo  [K] & $10^{3}$ & 1,000 \\
+  \hline
+ Mega  [M] & $10^{6}$ & 1,000,000 \\
+  \hline
+ Giga [G] & $10^{9}$ & 1,000,000,000 \\
+  \hline
+ Tera  [K] & $10^{12}$ & 1,000,000,000,000 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\section{Nomenclatura de Ejercicios}
+
+\begin{itemize}
+	\item \bb{\sone} $\rightarrow$ Ejercicios opcionales
+	\item \bb{\stwo} $\rightarrow$ Ejercicios de menor prioridad que dan refuerzo a un tema
+	\item \bb{\sthree} $\rightarrow$ Ejercicios útiles para comprender un tema o mejorar habilidades usadas en la materia
+	\item \bb{\sfour} $\rightarrow$ Ejercicios importantes de manejar bien, muy similares a los que aparecen en finales
+	\item \bb{\sfive} $\rightarrow$ Ejercicios clave sacados directamente de finales o parciales
+	\item \bb{\shard} $\rightarrow$ Difícil
+\end{itemize}
+
+%
+%%
+%%%
+%%%%
+%%%%%
+% INTRODUCCIÓN
+%%%%%
+%%%%
+%%%
+%%
+%
+
+
+\chapter{Introducción a las capas}
+
+\section{Ancho de banda vs Latencia \stwo}
+\hnote{Tenembaum Cap 1 Ej 3}
+El rendimiento de un sistema cliente-servidor se ve muy influenciado por dos características principales de las redes: el ancho de banda de la red (es decir, cuántos bits/segundo puede transportar) y la latencia (cuántos segundos tarda el primer bit en viajar del cliente al servidor)
+
+\begin{enumerate}
+\item Cite un ejemplo de una red que cuente con un ancho de banda alto pero también alta latencia.
+\item Después mencione un ejemplo de una red que tenga un ancho de banda bajo y una baja latencia.
+\end{enumerate}
+
+\section{Razonamiento de las capas \stwo}
+\hnote{Tenembaum Cap 1 Ej 10}
+¿Cuáles son dos razones para usar protocolos en capas? ¿Cuál es una posible desventaja de usar protocolos en capas?
+
+\section{Sobrecarga de headers \sthree}
+\hnote{Tenembaum Cap 1 Ej 16}
+Un sistema tiene una jerarquía de protocolos de n capas. Las aplicaciones generan mensajes con una longitud de M bytes. En cada una de las capas se agrega un encabezado de \bb{h} bytes.
+
+\begin{enumerate}
+\item ¿Qué fracción del ancho de banda de la red se llena con encabezados?
+\end{enumerate}
+
+\section{TCP vs UDP \sone}
+\hnote{Tenembaum Cap 1 Ej 17}
+¿Cuál es la principal diferencia entre TCP y UDP?
+
+\section{Longitud de bit \sthree}
+\hnote{Tenembaum Cap 1 Ej 22}
+¿Qué tan largo era un bit en el estándar 802.3 original en metros? Use una velocidad de transmisión de 10 Mbps y suponga que la velocidad de propagación en cable coaxial es de 2/3 la velocidad de la luz en el vacío.
+
+\note{Velocidad de la luz: 300.000 Km/s}
+
+\section{Redes inalámbricas y Ethernet \sone}
+\hnote{Tenembaum Cap 1 Ej 24}
+Ethernet y las redes inalámbricas tienen ciertas similitudes y diferencias. Una propiedad de Ethernet es que sólo se puede transmitir una trama a la vez.
+\begin{enumerate}
+\item ¿Comparte la red 802.11 esta propiedad con Ethernet?
+
+Explique su respuesta.
+\end{enumerate}
+
+\section{Uso diario de las redes \sone}
+\hnote{Tenembaum Cap 1 Ej 31}
+Haga una lista de actividades que realiza a diario en donde se utilicen redes de computadoras. 
+\begin{enumerate}
+\item ¿Cómo se alteraría su vida si de repente se apagaran estas redes?
+\end{enumerate}
+
+\section{Medios físicos de Ethernet \sone}
+\hnote{Kurose Cap 1 Ej R8}
+Cite algunos de los medios físicos sobre los que se puede emplear la tecnología Ethernet.
+
+\section{Tecnologías inalámbricas \sone}
+\hnote{Kurose Cap 1 Ej R10}
+Describa las tecnologías de acceso inalámbrico a Internet más populares hoy día. Compárelas e indique sus diferencias.
+
+\section{Componentes de retardo \stwo}
+\hnote{Kurose Cap 1 Ej R16}
+Considere el envío de un paquete desde un host emisor a un host receptor a través de una ruta fija.
+
+\begin{enumerate}
+\item Enumere los componentes del retardo extremo a extremo.
+\item ¿Cuáles de estos retardos son constantes y cuáles son variables?
+\end{enumerate}
+
+\section{Tiempo de propagación \sfour}
+\note{Kurose Cap 1 Ej R18}
+
+\begin{enumerate}
+\item ¿Cuánto tiempo tarda un paquete cuya longitud es de $1.000\ bytes$ en propagarse a través de un enlace a una distancia de 2.500 Km, siendo la velocidad de propagación igual a $ 2,5 * 10^{8}\ m/s $ y la velocidad de transmisión de $2 Mbps$?
+\item De forma más general, ¿cuánto tiempo tarda un paquete de longitud L en propagarse a través de un enlace a una distancia $d$, con una velocidad de propagación $s$ y una velocidad de transmisión de $R\ bps$?
+\item ¿Depende este retardo de la longitud del paquete?
+\item ¿Depende este retardo de la velocidad de transmisión?
+\end{enumerate}
+
+\section{Tareas de las capas \stwo}
+\hnote{Kurose Cap 1 Ej R22}
+Enumere cinco tareas que puede realizar una capa. ¿Es posible que una (o más) de estas tareas pudieran ser realizadas por dos (o más) capas?
+
+\begin{samepage}
+\section{Retardo extremo a extremo de 3 enlances \sfive}
+\hnote{Kurose Cap 1 Ej P10}
+
+Considere un paquete de longitud $L$ que tiene su origen en el sistema terminal $A$ y que viaja a través de tres enlaces hasta un sistema terminal de destino.
+
+Estos tres enlaces están conectados mediante dos dispositivos de conmutación de paquetes. Sean respectivamente $d_i,\ s_i\ y\ R_i$ la longitud, la velocidad de propagación y la velocidad de transmisión del enlace $i$, para $i = 1, 2, 3$.
+
+El dispositivo de conmutación de paquetes retarda cada paquete $d_{proc}$. Suponemos que no se producen retardos de cola
+
+\begin{enumerate}
+\item ¿Cuál es el retardo total extremo a extremo del paquete, en función de $d_i, s_i, R_i, (i = 1, 2, 3)$ y $L$?
+\item Suponga ahora:
+\subitem Que la longitud del paquete es de 1.500 B
+\subitem Que la velocidad de propagación en los tres enlaces es igual a $2,5 * 10^{8} m/s$
+\subitem Que la velocidad de transmisión en los tres enlaces es de 2 Mbps
+\subitem Que el retardo de procesamiento en el conmutador de paquetes es de 3 milisegundos
+\subitem Que la longitud del primer enlace es de 5.000 Km
+\subitem Que la del segundo es de 4.000 Km y que la del último enlace es de 1.000 Km.
+
+Para estos valores, ¿cuál es el retardo extremo a extremo?
+\end{enumerate}
+\end{samepage}
+
+%
+%%
+%%%
+%%%%
+%%%%%
+% CAPA DE APLICACIÓN
+%%%%%
+%%%%
+%%%
+%%
+%
+
+
+\chapter{Capa de Aplicación}
+
+\begin{exer}
+\section{Alicia y BitTorrent \stwo}
+Considere una nueva compañera Alicia que se une a BitTorrent sin poseer ningún trozo.\\ Sin trozos, no puede convertirse en una subidora top 4 para algún compañero, debido a que no tiene nada para subir.
+
+¿Cómo va a conseguir Alicia el primer trozo?
+
+¿Cuáles son las características de SMTP? Tener en cuenta los aspectos para
+evaluar/diseñar una aplicación de red 
+\end{exer}
+
+\section{Protocolos \sthree}
+¿Qué detalles especifica un protocolo?
+
+\section{Sistema de Nombres de Dominio \sone}
+¿Cuál es el propósito general del Sistema de Nombres de Dominio (DNS)? ¿Cuáles
+son sus características?
+
+\section{Conexiones de FTP \stwo}
+Cuando un usuario requiere el listado de un directorio FTP,\\ ¿Cuántas conexiones TCP son formadas? Explicar.
+
+\section{DNS en un browser \sone}
+¿Cuándo usa DNS un navegador web?
+
+\begin{exer}
+\section{Tiempo de descarga P2P vs Cliente/Servidor \sfour}
+
+Se tiene la siguiente red, y se desea descargar un archivo de 1.25 GB bajo el paradigma cliente/servidor y P2P. \\ Asuma que el archivo ya está distribuido entre los peers.
+
+\addim{app_1}
+
+\begin{enumerate}
+\item Determine el tiempo descarga a destino en el caso cliente/servidor
+\item Determine el tiempo descarga a destino en el caso P2P si el servidor $no$ actua como peer
+\item Determine el tiempo descarga a destino en el caso P2P si el servidor actua como peer
+\item Liste brevemente las ventajas y desventajas de cada paradigma. 
+\end{enumerate}
+
+\hnote{Ayuda: asuma que el enrutamiento es óptimo y que los enrutadores pueden
+dividir la carga del tráfico en varias interfaces.}
+
+\end{exer}
+
+\section{Diferencias entre browsers \sone}
+
+¿Es posible que cuando un usuario selecciona un enlace con Firefox, una aplicación de ayuda particular es ejecutada, pero cuando selecciona el mismo enlace en Internet Explorer causa que una aplicación de ayuda diferente sea iniciada, aun cuando el tipo MIME retornado en ambos casos es
+idéntico?\\ Explique su respuesta.
+
+\section{Utilidad del protocolo HTTP \stwo}
+
+Enunciar 4 problemas que resuelve el protocolo HTTP y decir qué facilidades usa
+para resolver cada uno de ellos (ayuda: si le resulta más fácil piense primero en una facilidad
+importante y piense para resolver qué problema la misma sirve).
+
+\note{No explicar esas facilidades, solo mencionarlas.}
+
+\section{Protocolos en TCP \sone}
+
+¿Por qué HTTP y FTP corren arriba de TCP en lugar de en UDP?
+
+\section{Interacciones entre componentes Web \stwo}
+
+Indicar la secuencia de pasos seguidos por una aplicación web considerando la
+siguiente situación:
+
+\begin{itemize}
+\item Se tiene una página HTML con una lista de enlaces, donde cada uno corresponde al nombre de un paper.
+\item La idea es que el usuario elige un paper de la lista y luego viene una página de respuesta que accedió al plugin de Adobe llamado Acrobat Reader para mostrar el paper usando el formato pdf.
+\item Se usa un $cookie$ para indicar todos los títulos de los papers elegidos anteriormente por el usuario.
+\end{itemize}
+
+Se pide ser lo más completo posible considerando los pasos de los distintos roles intervinientes: browser, web server, DNS server, etc.
+
+\note{Ayuda: Se deben indicar los pasos necesarios relacionados con el manejo de cookies, de MIME y del plug-in y todo en el orden correcto. Se deben indicar las aperturas y cierres de conexiones TCP.}
+
+\section{Cookies en e-commerce \sthree}
+
+Suponga que un sitio web de comercio electrónico opera con el protocolo HTTP 1.0\\Además asumir que:
+
+\begin{itemize}
+\item Se mantiene información de estado del carrito de compras de un cliente usando
+cookies.
+\item La manera que el servidor web responde a un pedido HTTP varía en función de las
+características del browser y de la plataforma del cliente.
+\item El browser de un cliente cuando recibe una página web obtiene la información de qué
+tipo de documento se trata y en base a la misma decide cómo procesar ese tipo de documento.
+\item Cuando el cliente hace un pedido para comprar, junto con el pedido se manda
+información de la hora y fecha en que se hizo el pedido de compra.
+\end{itemize}
+
+Indicar qué encabezados HTTP se necesitan usar (a lo largo de los pedidos y sus respuestas
+cuando se usa el sitio), por qué son necesarios y si son de pedido o de respuesta. Organizar su
+respuesta mediante una tabla.
+
+\begin{exer}
+\section{Tabla de cookies \sone}
+
+En la siguiente tabla, $www.aportal.com$ mantiene la pista de las preferencias de usuario en
+una cookie. \\
+
+\begin{center}
+\begin{tabular}{| c | c | c | c | c |} 
+ \hline
+ Domain & Path & Content & Expires & Secure \\ [0.2ex] 
+ \hline\hline
+ toms-casino.com & / & CustomerID=297793521 & 15-10-10 17:00 & Yes \\
+ \hline
+ jills-store.com & / & Cart=1-00501;1-07031;2-13721 & 11-1-11 14:22 & No \\
+ \hline
+ aportal.com & / & Prefs=Stk:CSCO+ORCL;Spt:Jets & 31-12-20 23:59 & No \\
+ \hline
+ sneaky.com & / & UserID=4627239101 & 31-12-19 23:59 & No \\
+ \hline
+\end{tabular}
+\end{center}
+
+Una desventaja de este esquema es que las cookies están limitadas a 4 KB, así, si
+las preferencias son extensivas, por ejemplo, muchas acciones, equipos de deportes, tipos de
+historias de noticias, el clima para varias ciudades, y más, el límite de 4 KB puede ser
+alcanzado.\\ Diseñar una forma alternativa para mantener la pista de las preferencias que no
+tenga este problema
+\end{exer}
+
+\begin{exer}
+\section{Cookies \stwo}
+Contestar las siguientes preguntas sobre los cookies:
+ 
+\begin{enumerate}
+\item ¿Para qué sirven?
+\item ¿Dónde se almacenan los cookies y por qué?
+\item Indique las dos situaciones en que los cookies dejan de existir.
+\item Enumere y explique los encabezados que usa HTTP para manejar los cookies
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\section{Imagen clickeable \sone}
+ ¿Cómo hacer una imagen clickable en HTML? Dar un ejemplo
+\end{exer}
+
+\begin{exer}
+\section{Enlace de email \sone}
+Escriba una página HTML que incluya un enlace a una dirección de mail
+$username@DomainName.com$. ¿Qué sucede cuando el usuario hace click en el enlace?
+\end{exer}
+
+\begin{exer}
+\section{Hiperlinks \sone}
+Mostrar la etiqueta $<a>$ que se necesita para hacer que el String “ACM” sea un
+hiperenlace a $http://www.acm.org$.
+\end{exer}
+
+\begin{exer}
+\section{Formulario Interburger \sone}
+Diseñar un formulario para una nueva compañía, $Interburger$, que permite que se
+ordenen hamburguesas vía internet.
+
+El formulario debería incluir el nombre del cliente, su dirección y su ciudad así como la elección del tamaño (i.e. gigante o inmensa) y la opción de queso.
+
+Las hamburguesas van a ser pagadas en efectivo a su entrega, de modo que no se
+necesita información de tarjeta de crédito.
+\end{exer}
+
+\begin{exer}
+\section{PHP vs JavaScript \stwo}
+Para cada una de las siguientes aplicaciones, decir si sería (a) posible y (b) mejor
+usar un script PHP o JavaScript y por qué:
+
+\begin{enumerate}
+\item Mostrar el calendario para cada mes requerido desde septiembre de 1752.
+\item Mostrar una planificación de vuelos desde Amsterdam a Nueva York.
+\item Dibujar un polinomio a partir de coeficientes proporcionados por el usuario.
+\end{enumerate}
+\end{exer}
+
+
+\begin{exer}
+\section{isPrime() \sone}
+Escribir un programa en JavaScript que acepta un entero mayor que 2 y dice si es
+un número primo.
+
+Notar que JavaScript tiene sentencias $if$ y while con la misma sintaxis que C y Java.
+
+El operador módulo es \%. Si necesita la raíz cuadrada de x, usar $Math.sqrt(x)$.
+\end{exer}
+
+\begin{exer}
+\section{Formulario Suma \sone}
+Diseñar un formulario que pide que el usuario ingrese dos números. Cuando el
+usuario aprieta el botón submit, el servidor retorna su suma.
+
+Escriba el código del lado del
+servidor como un script PHP.
+\end{exer}
+
+\begin{exer}
+\section{Cookies en PHP \sone}
+¿Qué facilidades ofrece PHP para manejo de cookies y para envío de encabezados
+de respuesta?
+
+¿Cómo se envía una cookie en la respuesta HTTP?
+\end{exer}
+
+\begin{exer}
+\section{Cookies en JavaScript \sone}
+¿Qué facilidades ofrece JavaScript para manejo de cookies y para envío de
+encabezados de pedido?
+
+¿Cómo se envía una cookie al servidor?
+\end{exer}
+
+\begin{exer}
+\section{Exercise Name \sone}
+Completar el siguiente código HTML: 
+\newline\hfill
+\begin{lstlisting}[language=HTML]
+<!DOCTYPE html>
+<html>
+  <body>
+   <p>Seleccionar un club de futbol.</p>
+   <select id="mySelect">
+   	<option value="Boca">Boca
+   	<option value="River">River
+   	<option value="Racing">Racing
+   	<option value="Belgrano">Belgrano
+   </select>
+   <p>Cuando eliges un club de futbol, una funcion es disparada,
+    la cual muestra el valor el
+    club elegido precedido de texto: elegiste el club: </p>
+   <p id="demo"></p>
+  </body>
+</html>
+\end{lstlisting}
+
+La idea es que se procesa la selección de un club de fútbol por medio de una función JavaScript
+apropiada que necesitan escribir. El output de esa función es en el elemento de id=”demo”.
+
+\end{exer}
+
+\begin{exer}
+\section{Generar Elemento \sone}
+
+Escribir el cuerpo de la función en javascript:
+\newline\hfill
+\begin{verbatim}
+function generateElement(eName, atName, atValue) {
+    CUERPO...
+}
+\end{verbatim}
+
+Que recibe nombre de etiqueta de elemento eName, nombre de atributo atName y valor para
+ese atributo atValue.
+La función crea elemento de nombre eName con atributo atName con su valor respectivo.
+
+¿Cómo generalizar esta función para el caso de considerar parámetros adicionales que son
+más atributos con sus respectivos valores?
+\end{exer}
+
+\begin{exer}
+\section{Completar con PHP \stwo}
+Sea el siguiente fragmento HTML con JavaScript incompleto a rellenar:
+
+\begin{verbatim}
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>The XMLHttpRequest Object</h2>
+    <button type="button" onclick="loadDoc()">Request data</button>
+    <p id="demo"></p>
+    
+    <script>
+      function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            --COMPLETAR--
+          }
+        };
+        xhttp.open(--COMPLETAR--);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(--COMPLETAR--);
+      }
+    </script>
+  </body>
+</html>
+\end{verbatim} 
+
+Se tiene un script PHP ObtenerDatosPersonales.php que recibe pedido POST con parámetros
+primerNombre y Apellido y produce en formato texto información sobre la persona.
+
+Se envía un pedido asincrónico para que se obtengan los datos personales de Luis Pérez.
+
+\begin{enumerate}
+\item Completar el HTML para que cumpla la función establecida
+\item ¿Cómo modificaría el código del ejercicio anterior para poder mostrar todos los
+encabezados de la respuesta del pedido y además mostrar en pantalla los encabezados
+\cd{Content-Length} y \cd{Content-Type}?
+\end{enumerate}
+\end{exer}
+
+%
+%%
+%%%
+%%%%
+%%%%%
+% CAPA DE TRANSPORTE
+%%%%%
+%%%%
+%%%
+%%
+%
+
+\chapter{Capa de Transporte}
+
+\begin{exer}
+\section{Header de TCP \sthree}
+\begin{enumerate}
+\item ¿Hasta cuántas palabras de 32 b se pueden tener en un encabezado TCP?
+\item ¿Hasta cuántas palabras de 32 b puede ocupar el campo de opciones?
+\item En el encabezado de TCP vimos que además de un campo de confirmación de 32 bits hay
+un bit ACK. ¿Este campo agrega realmente algo? ¿Por qué o por qué no?
+\end{enumerate}
+\end{exer}
+
+
+\section{Direccionamiento}
+\begin{exer}
+\subsection{Servicio activo o a demanda \stwo}
+Un criterio para decidir si tener un servidor activo todo el tiempo o hacer que comience
+en demanda usando un servidor de procesos es cuán frecuentemente los servicios provistos son
+usados.
+
+¿Puede pensar en algún otro criterio para tomar esta decisión?
+\end{exer}
+
+\begin{exer}
+\subsection{Servidor de procesos \sone}
+¿Para qué situación se necesita la solución servidor de procesos?
+
+¿Cuándo se necesita además un servidor de nombres? Justifique su respuesta
+\end{exer}
+
+\begin{exer}
+\subsection{PIC vs TCP \sone}
+¿Qué diferencias hay entre protocolo inicial de conexión y direccionamiento en TCP?
+\end{exer}
+
+\section{Transmisión de datos confiable}
+
+\begin{exer}
+\subsection{Conexión lejana \sthree}
+Considerar la situación de una conexión que atraviesa todo el largo de los Estados Unidos
+¿Cuán grande tendría que ser el tamaño de ventana para que la utilización del canal sea mayor a 98\%?
+
+Suponer que el tamaño de un paquete es de \cd{1500 B}, incluyendo tanto campos de encabezado
+como datos; el RTT de demora de propagación de 30 msec, y que la velocidad de transmisión es de 1 Gbps.
+\end{exer}
+
+\begin{exer}
+\subsection{Protocolo Retroceso N \sthree}
+Considerar el protocolo \cd{Retroceso N} con una ventana emisora de tamaño 4 y
+ números de secuencia desde el \cd{0} al \cd{1024}. Suponer que en el tiempo $t$, el siguiente paquete en
+orden que el receptor está esperando tiene un número de secuencia de $K$.
+
+Asumir que el medio no reordena los mensajes. Contestar las siguientes preguntas: 
+\begin{enumerate}
+\item ¿Cuáles son los posibles conjuntos de números de secuencia dentro de la ventana del emisor
+en el tiempo $t$?
+\item ¿Cuáles son los posibles valores del campo \cd{ACK} en todos los mensajes posibles corrientemente
+propagándose hacia el emisor en el tiempo $t$? Justifique su respuesta.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Protocolos de Tuberías \sthree}
+\begin{enumerate}
+\item ¿Qué representa/significa la ventana corrediza emisora para retroceso N? ¿Y para
+repetición selectiva?
+\item ¿Por qué en el protocolo de repetición selectiva se tiene que pedir que tamaño de ventana \cd{receptora = (MAX\_SEQ + 1)/2}? 
+\note{(o sea, qué situación se quiere evitar)}
+\item ¿Por qué motivo se usa un temporizador auxiliar en el protocolo de repetición selectiva?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Parada y Espera \sthree}
+Un cable conecta un host emisor con un host receptor; se tiene una tasa de bits de 4
+Mbps y un retardo de propagación de 0,2 msec. ¿Para cuál rango de tamaños de segmentos da
+parada y espera una eficiencia de al menos 50\%?
+\end{exer}
+
+\begin{exer}
+\subsection{ExerciseName \sfour}
+Un cable de 3000 Km de largo une dos hosts y es usado para transmitir segmentos de
+1500B usando protocolo \cd{Retroceso N}. La velocidad de transmisión es de 20 Mbps. Si la
+velocidad de propagación es de $6\ \mu sec/Km$. ¿Cuántos bits deberían tener los números de secuencia?
+\end{exer}
+
+\begin{exer}
+\subsection{Comunicación satelital \sthree}
+Segmentos de 10.000b son enviados por canal que opera a 10 Mbps usando un
+satélite geoestacionario cuyo tiempo de propagación desde la tierra es 270 msec. Las
+confirmaciones de recepción son siempre enviadas a caballito en los segmentos, los encabezados
+son muy cortos.
+Números de secuencia de 8 bits son usados. 
+
+Cuál es la utilización máxima del canal para los protocolos:
+\begin{enumerate}
+\item Parada y espera
+\item Retroceso N
+\item Repetición Selectiva
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Sobrecarga de ancho de banda \sthree \shard}
+Se tiene el siguiente escenario en un canal de 50 Kbps
+
+\begin{itemize}
+\item Segmentos de 8000b de carga util.
+\item Los encabezados son del tamaño de TCP, IP y 16B (respectivamente los encabezados de la capa de transporte, capa de red, y capa de enlace de datos)
+\item Los terminadores de tramas son de 4B.
+\item  Asumir que la propagación de la señal desde la Tierra al satélite es de 270 msec.
+\item Segmentos sin datos (es decir que solo tienen \cd{ACK} nunca ocurren)
+\item Los segmentos \cd{NAK} sí ocurren y ocupan 512 bits.
+\item La tasa de errores para segmentos es del $1\%$
+\item La tasa de errores de segmentos \cd{NAK} se puede ignorar (es demasiado chica para considerarla)
+\item Los números de secuencia son de 8 bits
+\end{itemize}
+
+Computar la fracción del ancho de banda que es usado en sobrecarga
+(encabezados y retransmisiones) por el protocolo de \cd{Repetición Selectiva}
+\end{exer}
+
+\section{Control de Flujo}
+
+\begin{exer}
+\subsection{Secuencia de control \sthree \shard}
+Se tiene una con conexión entre un emisor y un receptor
+Suponer
+\begin{itemize}
+\item Los números de secuencia son de 4 bits (o sea van de 0 a 15)
+\item El receptor tiene 4 búferes en total, todos de igual tamaño.
+\item Se usa la solución donde el emisor solicita espacio de búfer en el otro extremo.
+\end{itemize}
+
+De acuerdo a los siguientes eventos:
+
+\begin{enumerate}
+\item El Emisor pide 8 búferes.
+\item El Receptor otorga 4 búferes y espera el segmento de número de secuencia 0.
+\item El Emisor envía 3 segmentos de datos, los dos primeros llegan y el tercero se pierde.
+\item El Receptor confirma los 2 primeros segmentos de datos y otorga 3 búferes.
+\item El Emisor envía dos segmentos de datos nuevos que llegan y luego reenvía el segmento de datos que se perdió.
+\item El Receptor confirma todos los segmentos de datos y otorga 0 búferes.
+\item El Receptor otorga un búfer
+\item El Receptor otorga 2 búferes
+\item El Emisor manda 2 segmentos de datos
+\item El Receptor otorga 0 búferes
+\item El Receptor otorga 4 búferes pero este mensaje se pierde
+\end{enumerate}
+
+Mostrar en un gráfico la comunicación entre Emisor y receptor. 
+
+Para segmentos de datos enviados indicar número de secuencia, para segmentos de respuesta
+indicar cantidad de búferes otorgados y segmentos confirmados (asumir que no se envían datos en los mensajes de respuesta). Mostrar asignación de números de secuencia de segmentos recibidos a búferes del receptor
+\end{exer}
+
+\begin{exer}
+\subsection{Dedución basado en buffer \sthree}
+Suponer que hay una conexión TCP entre un emisor y un receptor.
+
+El receptor tiene un buffer circular de 4 KB. 
+
+Mostrar los segmentos enviados en ambas direcciones suponiendo los
+siguientes cambios de estado en el búfer del receptor:
+
+\begin{enumerate}
+\item El búfer del Receptor está vacío.
+\item El búfer del Receptor tiene 2KB
+\item El búfer del Receptor tiene 4KB (lleno)
+\item La Aplicación del Receptor lee 2KB
+\item El búfer del receptor tiene 3KB
+\end{enumerate}
+
+Mostrar tamaños y números de secuencia para segmentos enviados. 
+
+Mostrar tamaño de ventana y número de confirmación de recepción para segmentos recibidos.
+
+Mostrar cómo varía el uso del búfer circular.
+\end{exer}
+
+\begin{exer}
+\subsection{Anuncio de tamaño de ventana \stwo}
+Suponer que hay una conexión TCP entre un emisor y un receptor. Asumir que en un
+momento dado el receptor anuncia un tamaño de ventana de 816 KB. Explicar cómo expresa TCP
+esta situación con los campos en su encabezado. ¿Qué campos se usan y qué valores tendrían?
+\end{exer}
+
+\begin{exer}
+\subsection{Ping de ventana \stwo}
+Un emisor en una conexión TCP que recibe un 0 como tamaño de ventana
+periódicamente prueba al receptor para descubrir cuándo la ventana pasa a ser distinta de 0.
+
+¿Por qué podría el Receptor necesitar un temporizador extra si fuera responsable de reportar que su
+ventana pasó a ser distinta de cero (es decir, si el emisor no mandó un segmento de prueba)?
+\end{exer}
+
+\section{Control de Congestión \sone}
+
+\begin{exer}
+\subsection{Arrance lento \sthree}
+Considere el efecto de usar \cd{Arranque Lento} en una línea con 10 msec de tiempo de
+ronda y no hay congestión. La ventana receptora es de 24KB y el tamaño de segmento máximo es
+de 2 KB. ¿Cuánto toma (en \cd{RTTs}) antes que la primera ventana llena pueda ser enviada?
+\end{exer}
+
+\begin{exer}
+\subsection{Recuperación en TCP \sthree}
+Suponga que la ventana de congestión de TCP es fijada en 18 KB y que ocurre una
+expiración de temporizador.
+
+¿Cuán grande va a ser la ventana si las siguientes 4 ráfagas de
+transmisiones son todas exitosas? Asumir un tamaño de segmento máximo de 1KB.
+\end{exer}
+
+\begin{exer}
+\subsection{Velocidad de Arranque Lento \stwo}
+Una entidad al estilo TCP abre una conexión y usa Arranque Lento.
+¿Aproximadamente cuántos \cd{RTT} son requeridos antes de que TCP pueda enviar N segmentos?
+
+\note{Suponga que no hay expiraciones de temporizador}
+\end{exer}
+
+\begin{exer}
+\subsection{TCP Talhoe \sfour}
+Asumir que se usa algoritmo \cd{TCP Talhoe}, la ventana de congestión es fijada a 36 KB y
+luego ocurre un timeout; luego de esto el algoritmo hace \emph{lo que tiene que hacer} y eventualmente la ventana de congestión llega hasta los 24 KB con éxito sin que ocurran nuevos timeouts.
+
+Asumir que el segmento máximo usado por la conexión es de 1KB de tamaño.
+
+\begin{enumerate}
+\item ¿Si tuviera que hacer un diagrama cartesiano del comportamiento del algoritmo \cd{TCP Talhoe},
+qué representaría cada uno de los ejes cartesianos?
+\item Hacer un diagrama cartesiano mostrando el comportamiento del algoritmo \cd{TCP Talhoe} desde
+que ocurre el timeout mencionado (luego de los 36 KB) hasta que la ventana de congestión
+llega a 24 KB.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{TCP Reno \sfour}
+Supongamos que se usa el algoritmo de control de congestión \cd{TCP Reno}.
+
+Inicialmente el umbral está fijado a 32KB. Inicia la conexión y el algoritmo \cd{TCP Reno} comienza a operar. Ocurren 10 rondas de transmisión antes de un timeout.
+
+Se pide:
+
+\quad Mostrar el desempeño del algoritmo de \cd{TCP Reno} desde el inicio (una vez iniciada la conexión)
+hasta 6 rondas de transmisión exitosas luego del timeout señalado. Asumir que el segmento
+máximo usado por la conexión es de 1 KB de tamaño.
+\end{exer}
+
+\section{Conexiones y Comparación de segmentos}
+
+\begin{exer}
+\subsection{Números de secuencia de TCP \stwo}
+El campo de números de secuencia en el encabezado TCP es de 32 bits de largo, lo
+cual es suficientemente largo para cubrir 4 billones de bytes de datos. Incluso si tantos bytes
+nunca fueran transferidos por una conexión única, 
+
+¿Por qué puede el número de secuencia pasar de $2^{32} - 1$ a 0?
+\end{exer}
+
+\begin{exer}
+\subsection{Velocidad máxima teórica de TCP \sfour \shard}
+\hnote{Tenembaum Cap 6 Ej 34}
+¿Cuál es la velocidad más rápida de una línea en la cual un host puede enviar
+cargas útiles de TCP de 1500 B con un tiempo de vida de paquete de 120 s sin que los
+números de secuencia den vuelta?
+
+Tomar en cuenta la sobrecarga de TCP, IP y Ethernet.
+
+Asumir que las tramas de Ethernet se pueden mandar continuamente.
+\end{exer}
+
+\begin{exer}
+\subsection{Tasa de transmisión máxima \sthree}
+\hnote{Tenembaum Cap 6 Ej 36}
+En una red cuyo segmento máximo es de 128 B, tiempo de vida máximo de
+segmento es 30 s y tiene números de secuencia de 8 bits. ¿Cuál es la tasa de datos máxima
+por conexión?
+\end{exer}
+
+\begin{exer}
+\subsection{Tiempo de vida máximo \sthree}
+\hnote{Tenembaum Cap 6 Ej 39}
+Para resolver el problema de que los números de secuencia dan vuelta mientras
+que los paquetea anteriores aún existen se podrían usar números de secuencia de 64 bits.
+
+Sin embargo, teóricamente una fibra óptica puede correr a \bb{75 Tbps}.
+
+¿Qué tiempo de vida máximo de paquete es requerido para asegurarse que redes futuras de 75 Tbps no tienen problemas de números de secuencia que den vuelta, incluso con números de secuencia de 64 bits?
+
+Asumir que cada byte tiene su propio número de secuencia como lo hace \cd{TCP}. 
+\end{exer}
+
+\begin{exer}
+\subsection{Tamaño de ventana de protocolo \sthree}
+Lo han contratado para diseñar un protocolo que usa una ventana como \cd{TCP}. Este
+protocolo va a correr sobre una red de 1 Gbps. El \cd{RTT} de la red es 100 ms y el tiempo de vida
+máximo de segmento es de 30 s
+
+¿Cuántos bits incluirá para el tamaño de ventana y para el campo de
+número de secuencia en el encabezado de su protocolo? Justifique su respuesta.
+
+\note{Ayuda: \emph{"el tiempo de vida máximo de segmento es de 30 s"} significa que no pueden reutilizarse un números de secuencia durante este tiempo, para evitar que haya dos segmentos diferentes con el mismo número de secuencia)}
+\end{exer}
+
+\section{Seteo de Temporizador de Retransmisiones}
+
+\begin{exer}
+\subsection{Estimación de RTT con Jacobson \stwo}
+\hnote{Tenembaum Cap 6 Ej 32}
+
+Si el \cd{RTT} de \cd{TCP} es actualmente de 30 ms y las siguientes confirmaciones de
+recepción vienen luego de 26, 32 y 24 mseg respectivamente
+
+¿Cuál es la nueva estimación del \cd{RTT} usando el \cd{Algoritmo de Jacobson}?
+
+Usar $\alpha$ = 0,9
+\end{exer}
+
+\begin{exer}
+\subsection{Estimación de desviación media con Jacobson \sthree}
+Si el \cd{RTT} de \cd{TCP} es actualmente de 30 msec, la desviación media es actualmente 7
+ms y las siguientes confirmaciones de recepción llegan después de 26, 32, y 24 msec
+respectivamente,
+
+¿Cuál es la nueva estimación de la desviación media usando el algoritmo de Jacobson?
+¿Cuál es el nuevo valor de la expiración del temporizador de retransmisiones?
+
+\note{Ayuda: usar los resultados del ejercicio anterior: 'Estimación de RTT con Jacobson'}
+\end{exer}
+
+\begin{exer}
+\subsection{Temporizador de Karn \stwo}
+Considerando el \cd{Algoritmo de Karn} contestar: 
+
+\begin{enumerate}
+\item ¿Cómo se setea el temporizador de retransmisiones de un paquete nuevo?
+\item ¿Cómo se setea el temporizador de retransmisiones de paquete retransmitido por tercera vez?
+\end{enumerate}
+\end{exer}
+
+%
+%%
+%%%
+%%%%
+%%%%%
+% CAPA DE RED
+%%%%%
+%%%%
+%%%
+%%
+%
+
+
+\chapter{Capa de Red}
+
+\section{Datagramas y Circuitos Virtuales}
+
+\begin{exer}
+\section{Tablas de Circuitos Virtuales \stwo}
+Indicar 3 situaciones/eventos distintas/os que obligan a actualizar las tablas de
+enrutamientos en una subred de circuitos virtuales.
+\end{exer}
+
+\begin{exer}
+\section{Ventajas de Datagramas \sone}
+Indicar 3 ventajas de las \cd{Subredes de Datagramas} sobre las \cd{Subredes de Circuitos
+Virtuales}.
+\end{exer}
+
+\section{Algoritmos de Enrutamiento}
+
+\begin{exer}
+\section{ExerciseName \sone}
+Asumimos que se tiene la subred de la figura de abajo. Se desea enviar un paquete del
+nodo A al nodo D usando inundación.
+• Se cuenta la transmisión de un paquete a lo largo de una línea como una carga de uno
+• Estudiar del libro o las filminas los algoritmos de inundación de conteo de saltos y de
+inundación selectiva.
+• ¿cuál es la carga total generada si se usa inundación selectiva, un campo de conteo de saltos
+es usado y es inicialmente fijado en 4?
+
+\addim{net_1}
+
+\end{exer}
+
+
+
+%%%%%%%%%%%%%%%%%%%
+
+\begin{exer}
+\section{ExerciseName \sone}
+content
+\end{exer}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+%\begin{exer}
+%\subsection{ExerciseName \sone}
+%content
+%\end{exer}
+
+%\begin{exer}
+%\section{ExerciseName \sone}
+%content
+%\end{exer}
+
+%
+%%
+%%%
+%%%%
+%%%%%
+% CAPA DE ENLACE
+%%%%%
+%%%%
+%%%
+%%
+%
+
+
+\chapter{Capa de Enlace}
+
+%
+%%
+%%%
+%%%%
+%%%%%
+% CAPA DE FÍSICA
+%%%%%
+%%%%
+%%%
+%%
+%
+
+
+\chapter{Capa Física}
+
+\end{document}
+
