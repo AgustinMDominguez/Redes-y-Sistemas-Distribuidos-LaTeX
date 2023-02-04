@@ -3,7 +3,7 @@
     \author{Agustín M. Domínguez, Valentina S. Vispo}
     \date{Dic 2022}
     \renewcommand*\contentsname{Índice}
-    
+
     \addtolength{\topmargin}{-1cm}
     \addtolength{\textheight}{3cm}
     \usepackage[a4paper, total={6.8in, 9.2in}]{geometry}
@@ -15,35 +15,30 @@
     \usepackage{graphicx}
     \usepackage{inconsolata}
     \usepackage{listings}
-	\graphicspath{ {./images/} }
-	\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{Práctico \thechapter:}{1em}{}
-	
-%	\titleformat{\section}[hang]{\normalfont\large\bfseries}{\noindent\thesection}{1em}{}
-    
+	  \graphicspath{ {./images/} }
+	  \titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{Práctico \thechapter:}{1em}{}
+
 \begin{document}
 
+% COMMANDS
 \newcommand{\addim}[1]{\includegraphics[width=\textwidth]{#1}}
 \newcommand{\note}[1]{{\footnotesize {\textbf{#1}}}}
 \newcommand{\hnote}[1]{\note{#1}\hfill\break}
-\newcommand{\p}{\paragraph}
-\newcommand{\sone}{\textdaggerdbl}
-\newcommand{\stwo}{\textdaggerdbl \textdaggerdbl}
-\newcommand{\sthree}{\textdaggerdbl \textdaggerdbl \textdaggerdbl}
+\newcommand{\bb}[1]{\textbf{#1}}
 \newcommand{\cd}[1]{\texttt{#1}}
-\newcommand{\sfour}{\textdaggerdbl \textdaggerdbl \textdaggerdbl \textdaggerdbl}
+
+\newcommand{\sone}{\textdaggerdbl}
+\newcommand{\stwo}{\textdaggerdbl\textdaggerdbl}
+\newcommand{\sthree}{\textdaggerdbl\textdaggerdbl\textdaggerdbl}
+\newcommand{\sfour}{\textdaggerdbl\textdaggerdbl\textdaggerdbl\textdaggerdbl}
 \newcommand{\sfive}{\textcurrency}
 \newcommand{\shard}{$\ \bigstar$}
 \newcommand{\steo}{$\ \mathbb{T}$}
-\newcommand{\bb}[1]{\textbf{#1}}
+
+% ENVIRONMENTS
 \newenvironment{exer}{\noindent\begin{minipage}{\textwidth}}{\end{minipage}\ \hfill \break}
-\newenvironment{code}
-	{\begin{verbatim}}
-	{\end{verbatim}}
-\newcommand\blankpage{%
-    \null
-    \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
-    \newpage}
+
+% DOCUMENT
 
 \maketitle
 \tableofcontents
@@ -61,27 +56,27 @@ En toda la materia incluyendo estos prácticos, se usan las siguientes convencio
 \end{itemize}
 
 \begin{center}
-\begin{tabular}{|| c c || c || c c ||} 
+\begin{tabular}{|| c c || c || c c ||}
  \hline
- valor & bits & Prefix & bytes & valor \\ [0.2ex] 
+ valor & bits & Prefix & bytes & valor \\ [0.2ex]
  \hline\hline
- $10^{3}$b & Kb & Kilo & KB & $2^{10}$B \\ 
+ $10^{3}$b & Kb & Kilo & KB & $2^{10}$B \\
  \hline
-  $10^{6}$b & Mb & Mega & MB & $2^{20}$B \\ 
+  $10^{6}$b & Mb & Mega & MB & $2^{20}$B \\
  \hline
-   $10^{9}$b & Gb & Giga & GB & $2^{30}$B \\ 
+   $10^{9}$b & Gb & Giga & GB & $2^{30}$B \\
  \hline
-   $10^{12}$b & Tb & Tera & TB & $2^{40}$B \\ 
+   $10^{12}$b & Tb & Tera & TB & $2^{40}$B \\
  \hline
 \end{tabular}
 \end{center}
 
 \begin{center}
-\begin{tabular}{|| c | c | c ||} 
+\begin{tabular}{|| c | c | c ||}
  \hline
- Prefix & Exp & Valor \\ [0.2ex] 
+ Prefix & Exp & Valor \\ [0.2ex]
  \hline\hline
- pico [p] & $10^{-12}$ & 0.000000000001 \\ 
+ pico [p] & $10^{-12}$ & 0.000000000001 \\
  \hline
  nano [n] & $10^{-9}$ & 0.000000001 \\
  \hline
@@ -257,7 +252,7 @@ Considere una nueva compañera Alicia que se une a BitTorrent sin poseer ningún
 ¿Cómo va a conseguir Alicia el primer trozo?
 
 ¿Cuáles son las características de SMTP? Tener en cuenta los aspectos para
-evaluar/diseñar una aplicación de red 
+evaluar/diseñar una aplicación de red
 \end{exer}
 
 \section{Protocolos \sthree \steo}
@@ -284,11 +279,10 @@ Se tiene la siguiente red, y se desea descargar un archivo de 1.25 GB bajo el pa
 \item Determine el tiempo descarga a destino en el caso cliente/servidor
 \item Determine el tiempo descarga a destino en el caso P2P si el servidor $no$ actua como peer
 \item Determine el tiempo descarga a destino en el caso P2P si el servidor actua como peer
-\item Liste brevemente las ventajas y desventajas de cada paradigma. 
+\item Liste brevemente las ventajas y desventajas de cada paradigma.
 \end{enumerate}
 
-\hnote{Ayuda: asuma que el enrutamiento es óptimo y que los enrutadores pueden
-dividir la carga del tráfico en varias interfaces.}
+\hnote{Ayuda: asuma que el enrutamiento es óptimo y que los enrutadores pueden dividir la carga del tráfico en varias interfaces.}
 
 \end{exer}
 
@@ -375,7 +369,7 @@ tenga este problema
 \begin{exer}
 \section{Cookies \stwo \steo}
 Contestar las siguientes preguntas sobre los cookies:
- 
+
 \begin{enumerate}
 \item ¿Para qué sirven?
 \item ¿Dónde se almacenan los cookies y por qué?
@@ -462,7 +456,7 @@ encabezados de pedido?
 
 \begin{exer}
 \section{Exercise Name \sone}
-Completar el siguiente código HTML: 
+Completar el siguiente código HTML:
 \newline\hfill
 \begin{lstlisting}[language=HTML]
 <!DOCTYPE html>
@@ -518,7 +512,7 @@ Sea el siguiente fragmento HTML con JavaScript incompleto a rellenar:
     <h2>The XMLHttpRequest Object</h2>
     <button type="button" onclick="loadDoc()">Request data</button>
     <p id="demo"></p>
-    
+
     <script>
       function loadDoc() {
         var xhttp = new XMLHttpRequest();
@@ -534,7 +528,7 @@ Sea el siguiente fragmento HTML con JavaScript incompleto a rellenar:
     </script>
   </body>
 </html>
-\end{verbatim} 
+\end{verbatim}
 
 Se tiene un script PHP ObtenerDatosPersonales.php que recibe pedido POST con parámetros
 primerNombre y Apellido y produce en formato texto información sobre la persona.
@@ -569,7 +563,7 @@ encabezados de la respuesta del pedido y además mostrar en pantalla los encabez
 \item ¿Hasta cuántas palabras de 32 b se pueden tener en un encabezado TCP?
 \item ¿Hasta cuántas palabras de 32 b puede ocupar el campo de opciones?
 \item En el encabezado de TCP vimos que además de un campo de confirmación de 32 bits hay
-un bit ACK. ¿Este campo agrega realmente algo? ¿Por qué o por qué no?
+un bit \cd{ACK}. ¿Este campo agrega realmente algo? ¿Por qué o por qué no?
 \end{enumerate}
 \end{exer}
 
@@ -641,7 +635,7 @@ parada y espera una eficiencia de al menos 50\%?
 \subsection{ExerciseName \sfour}
 Un cable de 3000 Km de largo une dos hosts y es usado para transmitir segmentos de
 1500B usando protocolo \cd{Retroceso N}. La velocidad de transmisión es de 20 Mbps. Si la
-velocidad de propagación es de $6\ \mu sec/Km$. ¿Cuántos bits deberían tener los números de secuencia?
+velocidad de propagación es de $6\ \mu \sec/Km$. ¿Cuántos bits deberían tener los números de secuencia?
 \end{exer}
 
 \begin{exer}
@@ -650,7 +644,7 @@ Segmentos de 10.000b son enviados por canal que opera a 10 Mbps usando un
 satélite geoestacionario cuyo tiempo de propagación desde la tierra es 270 msec. Las
 confirmaciones de recepción son siempre enviadas a caballito en los segmentos, los encabezados
 son muy cortos.
-Números de secuencia de 8 bits son usados. 
+Números de secuencia de 8 bits son usados.
 
 Cuál es la utilización máxima del canal para los protocolos:
 \begin{enumerate}
@@ -964,7 +958,7 @@ Si un paquete es enviado de $A$ a $D$ y tiene un conteo máximo de saltos (\cd{t
 \begin{exer}
 \subsection{Tabla de enrutamiento del Vector Distancia \sthree}
 Considerar la subred de la siguiente figura. \\
- 
+
 \addim{net_3}
 
 Se usa enrutamiento de \cd{Vector de Distancia} y los siguientes vectores han llegado al enrutador \cd{C}:
@@ -1021,7 +1015,7 @@ su tabla de enrutamiento.
 \item Cantidad de paquetes que necesita enviar un enrutador a sus vecinos, para que la subred
 haga una actualización de todas sus tablas de enrutamiento.
 \end{enumerate}
- 
+
 Justifique sus respuestas.
 \end{exer}
 
@@ -1067,7 +1061,7 @@ Suponer que todas las regiones tienen el mismo número de enrutadores.
 \item Suponer que las distancias se miden como el número de saltos. ¿Usando la
 respuesta a la pregunta anterior calcular cuál es la cantidad de memoria en total
 utilizada por la subred necesaria para todas las tablas de enrutamiento?
-Justifique su respuesta. 
+Justifique su respuesta.
 \end{enumerate}
 \end{exer}
 
@@ -1205,9 +1199,9 @@ Sin embargo, hay un gap de 1024 direcciones no asignadas desde \cd{29.18.60.0} h
 \begin{exer}
 \subsection{Comportamiento de un enrutador CIDR \sthree}
  Un enrutador tiene las siguientes entradas \cd{(CIDR)} en su tabla de enrutamiento:\\
- 
+
 \begin{center}
-\begin{tabular}{| c | c |} 
+\begin{tabular}{| c | c |}
  \hline
  Address/mask & Next Hop \\
  \hline \hline
@@ -1334,7 +1328,7 @@ Suponer:
 Para cada uno de los siguientes enrutadores responder: 
 
 \emph{¿En cuáles protocolos de enrutamiento (OSPF, RIP, eBGP, o iBGP) el enrutador aprende acerca del prefijo $x$?}
- 
+
 \begin{enumerate}
 \item Enrutador $3c$
 \item Enrutador $3a$
@@ -1484,9 +1478,8 @@ Para las redes inalámbricas basadas en infraestructura responder:
 
 \begin{enumerate}
 \item ¿Por qué es necesario tener un sistema de distribución?
-\item ¿Qué se entiende por servicio de integración y usando qué tipo de dispositivo se lo
+\item ¿Qué se entiende por servicio de integración y usando qué tipo de dispositivo se lo puede llevar a cabo?
 \end{enumerate}
-puede llevar a cabo?
 \end{exer}
 
 \begin{exer}
