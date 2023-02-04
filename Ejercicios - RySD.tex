@@ -2,12 +2,14 @@
     \title{\textbf{Prácticos\\ Redes y Sistemas Distribuidos}}
     \author{Agustín M. Domínguez, Valentina S. Vispo}
     \date{Dic 2022}
+    \renewcommand*\contentsname{Índice}
     
     \addtolength{\topmargin}{-1cm}
     \addtolength{\textheight}{3cm}
     \usepackage[a4paper, total={6.8in, 9.2in}]{geometry}
     \usepackage{MnSymbol}
     \usepackage{amsmath}
+    \usepackage{amsfonts}
     \usepackage{afterpage}
     \usepackage{titlesec}
     \usepackage{graphicx}
@@ -30,9 +32,13 @@
 \newcommand{\cd}[1]{\texttt{#1}}
 \newcommand{\sfour}{\textdaggerdbl \textdaggerdbl \textdaggerdbl \textdaggerdbl}
 \newcommand{\sfive}{\textcurrency}
-\newcommand{\shard}{$\bigstar$}
+\newcommand{\shard}{$\ \bigstar$}
+\newcommand{\steo}{$\ \mathbb{T}$}
 \newcommand{\bb}[1]{\textbf{#1}}
 \newenvironment{exer}{\noindent\begin{minipage}{\textwidth}}{\end{minipage}\ \hfill \break}
+\newenvironment{code}
+	{\begin{verbatim}}
+	{\end{verbatim}}
 \newcommand\blankpage{%
     \null
     \thispagestyle{empty}%
@@ -98,13 +104,18 @@ En toda la materia incluyendo estos prácticos, se usan las siguientes convencio
 
 \section{Nomenclatura de Ejercicios}
 
+\subsection{Por prioridad}
 \begin{itemize}
 	\item \bb{\sone} $\rightarrow$ Ejercicios opcionales
 	\item \bb{\stwo} $\rightarrow$ Ejercicios de menor prioridad que dan refuerzo a un tema
 	\item \bb{\sthree} $\rightarrow$ Ejercicios útiles para comprender un tema o mejorar habilidades usadas en la materia
 	\item \bb{\sfour} $\rightarrow$ Ejercicios importantes de manejar bien, muy similares a los que aparecen en finales
 	\item \bb{\sfive} $\rightarrow$ Ejercicios clave sacados directamente de finales o parciales
+\end{itemize}
+\subsection{Otros modificadores}
+\begin{itemize}
 	\item \bb{\shard} $\rightarrow$ Difícil
+	\item \bb{\steo} $\rightarrow$ Sin cálculos ni desarrollo, el ejercicio se basa en conocimiento y deducción teórica
 \end{itemize}
 
 %
@@ -122,7 +133,7 @@ En toda la materia incluyendo estos prácticos, se usan las siguientes convencio
 
 \chapter{Introducción a las capas}
 
-\section{Ancho de banda vs Latencia \stwo}
+\section{Ancho de banda vs Latencia \stwo \steo}
 \hnote{Tenembaum Cap 1 Ej 3}
 El rendimiento de un sistema cliente-servidor se ve muy influenciado por dos características principales de las redes: el ancho de banda de la red (es decir, cuántos bits/segundo puede transportar) y la latencia (cuántos segundos tarda el primer bit en viajar del cliente al servidor)
 
@@ -131,19 +142,19 @@ El rendimiento de un sistema cliente-servidor se ve muy influenciado por dos car
 \item Después mencione un ejemplo de una red que tenga un ancho de banda bajo y una baja latencia.
 \end{enumerate}
 
-\section{Razonamiento de las capas \stwo}
+\section{Razonamiento de las capas \stwo \steo}
 \hnote{Tenembaum Cap 1 Ej 10}
 ¿Cuáles son dos razones para usar protocolos en capas? ¿Cuál es una posible desventaja de usar protocolos en capas?
 
 \section{Sobrecarga de headers \sthree}
 \hnote{Tenembaum Cap 1 Ej 16}
-Un sistema tiene una jerarquía de protocolos de n capas. Las aplicaciones generan mensajes con una longitud de M bytes. En cada una de las capas se agrega un encabezado de \bb{h} bytes.
+Un sistema tiene una jerarquía de protocolos de $n$ capas. Las aplicaciones generan mensajes con una longitud de $M$ bytes. En cada una de las capas se agrega un encabezado de $h$ bytes.
 
 \begin{enumerate}
 \item ¿Qué fracción del ancho de banda de la red se llena con encabezados?
 \end{enumerate}
 
-\section{TCP vs UDP \sone}
+\section{TCP vs UDP \sone \steo}
 \hnote{Tenembaum Cap 1 Ej 17}
 ¿Cuál es la principal diferencia entre TCP y UDP?
 
@@ -153,7 +164,7 @@ Un sistema tiene una jerarquía de protocolos de n capas. Las aplicaciones gener
 
 \note{Velocidad de la luz: 300.000 Km/s}
 
-\section{Redes inalámbricas y Ethernet \sone}
+\section{Redes inalámbricas y Ethernet \sone \steo}
 \hnote{Tenembaum Cap 1 Ej 24}
 Ethernet y las redes inalámbricas tienen ciertas similitudes y diferencias. Una propiedad de Ethernet es que sólo se puede transmitir una trama a la vez.
 \begin{enumerate}
@@ -162,22 +173,22 @@ Ethernet y las redes inalámbricas tienen ciertas similitudes y diferencias. Una
 Explique su respuesta.
 \end{enumerate}
 
-\section{Uso diario de las redes \sone}
+\section{Uso diario de las redes \sone \steo}
 \hnote{Tenembaum Cap 1 Ej 31}
 Haga una lista de actividades que realiza a diario en donde se utilicen redes de computadoras. 
 \begin{enumerate}
 \item ¿Cómo se alteraría su vida si de repente se apagaran estas redes?
 \end{enumerate}
 
-\section{Medios físicos de Ethernet \sone}
+\section{Medios físicos de Ethernet \sone \steo}
 \hnote{Kurose Cap 1 Ej R8}
 Cite algunos de los medios físicos sobre los que se puede emplear la tecnología Ethernet.
 
-\section{Tecnologías inalámbricas \sone}
+\section{Tecnologías inalámbricas \sone \steo}
 \hnote{Kurose Cap 1 Ej R10}
 Describa las tecnologías de acceso inalámbrico a Internet más populares hoy día. Compárelas e indique sus diferencias.
 
-\section{Componentes de retardo \stwo}
+\section{Componentes de retardo \stwo \steo}
 \hnote{Kurose Cap 1 Ej R16}
 Considere el envío de un paquete desde un host emisor a un host receptor a través de una ruta fija.
 
@@ -196,7 +207,7 @@ Considere el envío de un paquete desde un host emisor a un host receptor a trav
 \item ¿Depende este retardo de la velocidad de transmisión?
 \end{enumerate}
 
-\section{Tareas de las capas \stwo}
+\section{Tareas de las capas \stwo \steo}
 \hnote{Kurose Cap 1 Ej R22}
 Enumere cinco tareas que puede realizar una capa. ¿Es posible que una (o más) de estas tareas pudieran ser realizadas por dos (o más) capas?
 
@@ -240,7 +251,7 @@ Para estos valores, ¿cuál es el retardo extremo a extremo?
 \chapter{Capa de Aplicación}
 
 \begin{exer}
-\section{Alicia y BitTorrent \stwo}
+\section{Alicia y BitTorrent \stwo \steo}
 Considere una nueva compañera Alicia que se une a BitTorrent sin poseer ningún trozo.\\ Sin trozos, no puede convertirse en una subidora top 4 para algún compañero, debido a que no tiene nada para subir.
 
 ¿Cómo va a conseguir Alicia el primer trozo?
@@ -249,17 +260,17 @@ Considere una nueva compañera Alicia que se une a BitTorrent sin poseer ningún
 evaluar/diseñar una aplicación de red 
 \end{exer}
 
-\section{Protocolos \sthree}
+\section{Protocolos \sthree \steo}
 ¿Qué detalles especifica un protocolo?
 
-\section{Sistema de Nombres de Dominio \sone}
+\section{Sistema de Nombres de Dominio \sone \steo}
 ¿Cuál es el propósito general del Sistema de Nombres de Dominio (DNS)? ¿Cuáles
 son sus características?
 
-\section{Conexiones de FTP \stwo}
+\section{Conexiones de FTP \stwo \steo}
 Cuando un usuario requiere el listado de un directorio FTP,\\ ¿Cuántas conexiones TCP son formadas? Explicar.
 
-\section{DNS en un browser \sone}
+\section{DNS en un browser \sone \steo}
 ¿Cuándo usa DNS un navegador web?
 
 \begin{exer}
@@ -281,12 +292,12 @@ dividir la carga del tráfico en varias interfaces.}
 
 \end{exer}
 
-\section{Diferencias entre browsers \sone}
+\section{Diferencias entre browsers \sone \steo}
 
-¿Es posible que cuando un usuario selecciona un enlace con Firefox, una aplicación de ayuda particular es ejecutada, pero cuando selecciona el mismo enlace en Internet Explorer causa que una aplicación de ayuda diferente sea iniciada, aun cuando el tipo MIME retornado en ambos casos es
+¿Es posible que cuando un usuario selecciona un enlace con Firefox, una aplicación de ayuda particular es ejecutada, pero cuando selecciona el mismo enlace en Internet Explorer causa que una aplicación de ayuda diferente sea iniciada, aun cuando el tipo \cd{MIME} retornado en ambos casos es
 idéntico?\\ Explique su respuesta.
 
-\section{Utilidad del protocolo HTTP \stwo}
+\section{Utilidad del protocolo HTTP \stwo \steo}
 
 Enunciar 4 problemas que resuelve el protocolo HTTP y decir qué facilidades usa
 para resolver cada uno de ellos (ayuda: si le resulta más fácil piense primero en una facilidad
@@ -294,7 +305,7 @@ importante y piense para resolver qué problema la misma sirve).
 
 \note{No explicar esas facilidades, solo mencionarlas.}
 
-\section{Protocolos en TCP \sone}
+\section{Protocolos en TCP \sone \steo}
 
 ¿Por qué HTTP y FTP corren arriba de TCP en lugar de en UDP?
 
@@ -311,7 +322,7 @@ siguiente situación:
 
 Se pide ser lo más completo posible considerando los pasos de los distintos roles intervinientes: browser, web server, DNS server, etc.
 
-\note{Ayuda: Se deben indicar los pasos necesarios relacionados con el manejo de cookies, de MIME y del plug-in y todo en el orden correcto. Se deben indicar las aperturas y cierres de conexiones TCP.}
+\note{Ayuda: Se deben indicar los pasos necesarios relacionados con el manejo de cookies, de \cd{MIME} y del plug-in y todo en el orden correcto. Se deben indicar las aperturas y cierres de conexiones TCP.}
 
 \section{Cookies en e-commerce \sthree}
 
@@ -335,7 +346,7 @@ respuesta mediante una tabla.
 \begin{exer}
 \section{Tabla de cookies \sone}
 
-En la siguiente tabla, $www.aportal.com$ mantiene la pista de las preferencias de usuario en
+En la siguiente tabla, \cd{www.aportal.com} mantiene la pista de las preferencias de usuario en
 una cookie. \\
 
 \begin{center}
@@ -343,13 +354,13 @@ una cookie. \\
  \hline
  Domain & Path & Content & Expires & Secure \\ [0.2ex] 
  \hline\hline
- toms-casino.com & / & CustomerID=297793521 & 15-10-10 17:00 & Yes \\
+ \cd{toms-casino.com} & \cd{/} & \cd{CustomerID=297793521} & \cd{15-10-10 17:00} & Yes \\
  \hline
- jills-store.com & / & Cart=1-00501;1-07031;2-13721 & 11-1-11 14:22 & No \\
+ \cd{jills-store.com} & \cd{/} & \cd{Cart=1-00501;1-07031;2-13721} & \cd{11-1-11 14:22} & No \\
  \hline
- aportal.com & / & Prefs=Stk:CSCO+ORCL;Spt:Jets & 31-12-20 23:59 & No \\
+ \cd{aportal.com} & \cd{/} & \cd{Prefs=Stk:CSCO+ORCL;Spt:Jets} & \cd{31-12-20 23:59} & No \\
  \hline
- sneaky.com & / & UserID=4627239101 & 31-12-19 23:59 & No \\
+ \cd{sneaky.com} & \cd{/} & \cd{UserID=4627239101} & \cd{31-12-19 23:59} & No \\
  \hline
 \end{tabular}
 \end{center}
@@ -362,7 +373,7 @@ tenga este problema
 \end{exer}
 
 \begin{exer}
-\section{Cookies \stwo}
+\section{Cookies \stwo \steo}
 Contestar las siguientes preguntas sobre los cookies:
  
 \begin{enumerate}
@@ -402,7 +413,7 @@ necesita información de tarjeta de crédito.
 \end{exer}
 
 \begin{exer}
-\section{PHP vs JavaScript \stwo}
+\section{PHP vs JavaScript \stwo \steo}
 Para cada una de las siguientes aplicaciones, decir si sería (a) posible y (b) mejor
 usar un script PHP o JavaScript y por qué:
 
@@ -434,7 +445,7 @@ servidor como un script PHP.
 \end{exer}
 
 \begin{exer}
-\section{Cookies en PHP \sone}
+\section{Cookies en PHP \sone \steo}
 ¿Qué facilidades ofrece PHP para manejo de cookies y para envío de encabezados
 de respuesta?
 
@@ -442,7 +453,7 @@ de respuesta?
 \end{exer}
 
 \begin{exer}
-\section{Cookies en JavaScript \sone}
+\section{Cookies en JavaScript \sone \steo}
 ¿Qué facilidades ofrece JavaScript para manejo de cookies y para envío de
 encabezados de pedido?
 
@@ -553,7 +564,7 @@ encabezados de la respuesta del pedido y además mostrar en pantalla los encabez
 \chapter{Capa de Transporte}
 
 \begin{exer}
-\section{Header de TCP \sthree}
+\section{Header de TCP \sthree \steo}
 \begin{enumerate}
 \item ¿Hasta cuántas palabras de 32 b se pueden tener en un encabezado TCP?
 \item ¿Hasta cuántas palabras de 32 b puede ocupar el campo de opciones?
@@ -565,7 +576,7 @@ un bit ACK. ¿Este campo agrega realmente algo? ¿Por qué o por qué no?
 
 \section{Direccionamiento}
 \begin{exer}
-\subsection{Servicio activo o a demanda \stwo}
+\subsection{Servicio activo o a demanda \stwo \steo}
 Un criterio para decidir si tener un servidor activo todo el tiempo o hacer que comience
 en demanda usando un servidor de procesos es cuán frecuentemente los servicios provistos son
 usados.
@@ -574,14 +585,14 @@ usados.
 \end{exer}
 
 \begin{exer}
-\subsection{Servidor de procesos \sone}
+\subsection{Servidor de procesos \sone \steo}
 ¿Para qué situación se necesita la solución servidor de procesos?
 
 ¿Cuándo se necesita además un servidor de nombres? Justifique su respuesta
 \end{exer}
 
 \begin{exer}
-\subsection{PIC vs TCP \sone}
+\subsection{PIC vs TCP \sone \steo}
 ¿Qué diferencias hay entre protocolo inicial de conexión y direccionamiento en TCP?
 \end{exer}
 
@@ -598,9 +609,7 @@ como datos; el RTT de demora de propagación de 30 msec, y que la velocidad de t
 
 \begin{exer}
 \subsection{Protocolo Retroceso N \sthree}
-Considerar el protocolo \cd{Retroceso N} con una ventana emisora de tamaño 4 y
- números de secuencia desde el \cd{0} al \cd{1024}. Suponer que en el tiempo $t$, el siguiente paquete en
-orden que el receptor está esperando tiene un número de secuencia de $K$.
+Considerar el protocolo \cd{Retroceso N} con una ventana emisora de tamaño 4 y números de secuencia desde el \cd{0} al \cd{1024}. Suponer que en el tiempo $t$, el siguiente paquete en orden que el receptor está esperando tiene un número de secuencia de $K$.
 
 Asumir que el medio no reordena los mensajes. Contestar las siguientes preguntas: 
 \begin{enumerate}
@@ -612,10 +621,9 @@ propagándose hacia el emisor en el tiempo $t$? Justifique su respuesta.
 \end{exer}
 
 \begin{exer}
-\subsection{Protocolos de Tuberías \sthree}
+\subsection{Protocolos de Tuberías \sthree \steo}
 \begin{enumerate}
-\item ¿Qué representa/significa la ventana corrediza emisora para retroceso N? ¿Y para
-repetición selectiva?
+\item ¿Qué representa/significa la ventana corrediza emisora para retroceso N? ¿Y para repetición selectiva?
 \item ¿Por qué en el protocolo de repetición selectiva se tiene que pedir que tamaño de ventana \cd{receptora = (MAX\_SEQ + 1)/2}? 
 \note{(o sea, qué situación se quiere evitar)}
 \item ¿Por qué motivo se usa un temporizador auxiliar en el protocolo de repetición selectiva?
@@ -738,7 +746,7 @@ esta situación con los campos en su encabezado. ¿Qué campos se usan y qué va
 \end{exer}
 
 \begin{exer}
-\subsection{Ping de ventana \stwo}
+\subsection{Ping de ventana \stwo \steo}
 Un emisor en una conexión TCP que recibe un 0 como tamaño de ventana
 periódicamente prueba al receptor para descubrir cuándo la ventana pasa a ser distinta de 0.
 
@@ -746,7 +754,7 @@ periódicamente prueba al receptor para descubrir cuándo la ventana pasa a ser 
 ventana pasó a ser distinta de cero (es decir, si el emisor no mandó un segmento de prueba)?
 \end{exer}
 
-\section{Control de Congestión \sone}
+\section{Control de Congestión}
 
 \begin{exer}
 \subsection{Arrance lento \sthree}
@@ -804,7 +812,7 @@ máximo usado por la conexión es de 1 KB de tamaño.
 \section{Conexiones y Comparación de segmentos}
 
 \begin{exer}
-\subsection{Números de secuencia de TCP \stwo}
+\subsection{Números de secuencia de TCP \stwo \steo}
 El campo de números de secuencia en el encabezado TCP es de 32 bits de largo, lo
 cual es suficientemente largo para cubrir 4 billones de bytes de datos. Incluso si tantos bytes
 nunca fueran transferidos por una conexión única, 
@@ -884,7 +892,7 @@ respectivamente,
 \end{exer}
 
 \begin{exer}
-\subsection{Temporizador de Karn \stwo}
+\subsection{Temporizador de Karn \stwo \steo}
 Considerando el \cd{Algoritmo de Karn} contestar: 
 
 \begin{enumerate}
@@ -911,13 +919,13 @@ Considerando el \cd{Algoritmo de Karn} contestar:
 \section{Datagramas y Circuitos Virtuales}
 
 \begin{exer}
-\section{Tablas de Circuitos Virtuales \stwo}
+\section{Tablas de Circuitos Virtuales \stwo \steo}
 Indicar 3 situaciones/eventos distintas/os que obligan a actualizar las tablas de
 enrutamientos en una subred de circuitos virtuales.
 \end{exer}
 
 \begin{exer}
-\section{Ventajas de Datagramas \sone}
+\section{Ventajas de Datagramas \sone \steo}
 Indicar 3 ventajas de las \cd{Subredes de Datagramas} sobre las \cd{Subredes de Circuitos
 Virtuales}.
 \end{exer}
@@ -925,40 +933,432 @@ Virtuales}.
 \section{Algoritmos de Enrutamiento}
 
 \begin{exer}
-\section{ExerciseName \sone}
+\subsection{Conteo de saltos en inundación selectiva \sthree}
 Asumimos que se tiene la subred de la figura de abajo. Se desea enviar un paquete del
-nodo A al nodo D usando inundación.
-• Se cuenta la transmisión de un paquete a lo largo de una línea como una carga de uno
-• Estudiar del libro o las filminas los algoritmos de inundación de conteo de saltos y de
-inundación selectiva.
-• ¿cuál es la carga total generada si se usa inundación selectiva, un campo de conteo de saltos
-es usado y es inicialmente fijado en 4?
+nodo $A$ al nodo $D$ usando inundación.
+
+Se cuenta la transmisión de un paquete a lo largo de una línea como una carga de uno.
+
+¿Cuál es la carga total generada si se usa \cd{Inundación Selectiva} y un campo de conteo de saltos
+ inicialmente fijado en 4? \\
 
 \addim{net_1}
-
 \end{exer}
-
-
-
-%%%%%%%%%%%%%%%%%%%
 
 \begin{exer}
-\section{ExerciseName \sone}
-content
+\subsection{Inundación con TTL \stwo}
+Considere la red de abajo. 
+
+\addim{net_2}
+
+Suponga que usa \cd{Inundación} como algoritmo de enrutamiento.
+
+Si un paquete es enviado de $A$ a $D$ y tiene un conteo máximo de saltos (\cd{ttl}) de 3.
+
+\begin{enumerate}
+\item Listar todas las rutas que va a tomar
+\item ¿Cuántos saltos se consumen en total?
+\end{enumerate}
 \end{exer}
 
+\begin{exer}
+\subsection{Tabla de enrutamiento del Vector Distancia \sthree}
+Considerar la subred de la siguiente figura. \\
+ 
+\addim{net_3}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%5
+Se usa enrutamiento de \cd{Vector de Distancia} y los siguientes vectores han llegado al enrutador \cd{C}:
+\begin{itemize}
+\item Desde \cd{B}: \cd{(5, 0, 8, 12, 6, 2)}
+\item Desde \cd{D}: \cd{(16, 12, 6, 0, 9, 10)}
+\item Desde \cd{E}: \cd{(7, 6, 3, 9, 0, 4)}
+\end{itemize}
+El costo de los enlaces de \cd{C} a \cd{B}, \cd{D} y \cd{E} son: 6, 3, y 5 respectivamente.
 
-%\begin{exer}
-%\subsection{ExerciseName \sone}
-%content
-%\end{exer}
+¿Cuál es la nueva tabla de enrutamiento de \cd{C}? Dar tanto la línea de salida como el costo.
+\end{exer}
 
-%\begin{exer}
-%\section{ExerciseName \sone}
-%content
-%\end{exer}
+\begin{exer}
+\subsection{Costo del Algoritmo de Enrutamiento \sthree}
+Si en una red de 50 enrutadores los costos son almacenados como números de 8 bits y los
+Vectores de Distancia son intercambiados 2 veces por segundo
+
+¿Qué ancho de banda por línea duplex total es consumido por el algoritmo de enrutamiento de vector de distancia?
+
+Asumir que cada enrutador tiene 3 líneas con otros enrutadores.
+\end{exer}
+
+\begin{exer}
+\subsection{Costo de una red anillo \sthree}
+Supongamos que tenemos una subred con forma de Anillo (ciclo) de $N$ enrutadores (i.e.
+cada enrutador está conectado con 2 enrutadores vecinos) y que se usa el protocolo de \cd{Estado de
+Enlace}
+
+Asuma:
+\begin{itemize}
+\item Cada enrutador tiene dos líneas con un vecino: una para enviar y una para recibir;
+\item Si un paquete atraviesa una línea, se cuenta como una carga de 1;
+\end{itemize}
+¿Cuál es la carga total en la subred para el proceso entero para la actualización de las tablas
+de enrutamiento?
+\end{exer}
+
+\begin{exer}
+\subsection{EEE vs EVD \sthree}
+Asumir que se tiene una \b{Subred con N enrutadores cada uno de ellos con M vecinos}.
+
+Asumir para simplificar que nunca se caen ni las líneas ni los enrutadores.
+
+Comparar los protocolos de \cd{Enrutamiento de Vector de Distancia} con \cd{Enrutamiento de Estado de
+Enlace} indicando cuál de los dos se comporta mejor para los siguientes criterios (i. e. necesita
+una cantidad menor según el criterio):
+
+\begin{enumerate}
+\item Cantidad de información total necesitada para actualizar la tabla de enrutamiento de un
+enrutador.
+\item Cantidad de paquetes de información que necesita recibir un enrutador para actualizar
+su tabla de enrutamiento.
+\item Cantidad de paquetes que necesita enviar un enrutador a sus vecinos, para que la subred
+haga una actualización de todas sus tablas de enrutamiento.
+\end{enumerate}
+ 
+Justifique sus respuestas.
+\end{exer}
+
+\begin{exer}
+\subsection{Buffer de Estado de Enlace \stwo \steo}
+Si consideramos la optimización del algoritmo de \cd{Estado de Enlace}, dar dos ventajas (i. e. de qué tareas nos ahorramos) que se tienen por usar la estructura de datos de buffer de paquetes de estado de enlace.
+\end{exer}
+
+\begin{exer}
+\subsection{Actualización de Tabla de Registros \stwo \steo}
+Supongamos que tenemos una red que usa Inundación con registro de paquetes difundidos y contadores.
+
+\begin{enumerate}
+\item ¿Qué evento obliga a actualizar la tabla de registro de paquetes difundidos de un enrutador?
+\item Indicar los pasos (sin código) del algoritmo de actualización de esta tabla.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\section{Enrutamiento Jerárquico}
+\subsection{Cantidad de enrutadores \sthree}
+Enrutamiento jerárquico: asumir que todos los elementos de nivel $n$ contienen la misma
+cantidad de elementos de nivel $n+1$. Suponga que hay 3 niveles
+
+\begin{enumerate}
+\item ¿Cuántos enrutadores hay en la subred? Dar una fórmula. Justificarla.
+\item ¿Cuál es el tamaño de las tablas de enrutamiento? Dar una fórmula. Justificarla.
+\item Explicar cómo se asignan nombres a elementos de nivel 1, a elementos de nivel 2 y a elementos de nivel 3. 
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Elección de regiones \stwo \shard}
+Supongamos que se tienen 800 enrutadores y se usa el esquema de enrutamiento jerárquico con dos niveles solamente.
+
+Suponer que todas las regiones tienen el mismo número de enrutadores.
+
+\begin{enumerate}
+\item ¿Cuántas regiones conviene tener de modo que la tabla de enrutamiento sea lo más chica posible? Justificar la respuesta.
+\subitem \note{Ayuda 1: expresar número de enrutadores como fórmula en términos de cantidad de regiones y cantidad de enrutadores por región.}
+\subitem \note{Ayuda 2: considerar la descomposición del número de enrutadores en factores primos. ¿Cuál es el resultado de esa descomposición?}
+\subitem \note{Ayuda 3: Usando los resultados de las ayudas anteriores encontrar el tamaño de región que hace la tabla de enrutamiento óptima.}
+\item Suponer que las distancias se miden como el número de saltos. ¿Usando la
+respuesta a la pregunta anterior calcular cuál es la cantidad de memoria en total
+utilizada por la subred necesaria para todas las tablas de enrutamiento?
+Justifique su respuesta. 
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\section{Control de Congestión}
+\subsection{Paquetes Reguladores vs Bit de Advertencia \stwo \steo}
+¿Qué ventajas ofrece el algoritmo de \cd{Paquetes Reguladores} frente al de \cd{Bit de
+Advertencia}?
+
+Dar y justificar al menos dos de ellas.
+\end{exer}
+
+\begin{exer}
+\subsection{Control con parada y espera \sthree}
+Como posible mecanismo de Control de Congestión en una subred de circuitos virtuales
+un enrutador se puede refrenar en confirmar un paquete recibido hasta que:
+
+\begin{itemize}
+\item Sabe que su última transmisión a lo largo del circuito virtual fue recibida exitosamente.
+\item Tiene un búfer libre.
+\end{itemize}
+
+Por simplicidad asumir que los enrutadores usan un protocolo de \cd{Parada y Espera} y que cada
+circuito virtual tiene un búfer dedicado a él para cada dirección del tráfico.
+
+Si toma $T$ segundos transmitir un paquete (de datos o confirmación de recepción) y hay $n$ enrutadores en el camino,
+
+¿Cuál es la tasa por la cual los paquetes son entregados al host de destino?
+
+Asumir que no ocurren errores de transmisión y que la conexión host-enrutador es infinitamente rápida.
+\end{exer}
+
+\begin{exer}
+\subsection{Comparación de algoritmos por situación \sthree \steo}
+Indicar cual de los algoritmos de control de congestión estudiados para capa de red es el más conveniente para cada una de las siguientes situaciones:
+
+\begin{enumerate}
+\item El buffer de la línea de salida está lleno.
+\item La espera para que un paquete sea reenviado por una línea de salida $L$ de un enrutador es demasiada y está creciendo (aunque aun hay bastante espacio de buffer). Además todos los caminos que unen hosts pasando por $L$ son cortos (pocos saltos). 
+\item La ruta $P$ entre un host de origen y un host de destino contiene enrutador $R$. En $P$ el enrutador $R$ está muy muy lejos del host de origen (muchísimos saltos) y la línea de salida de $R$ en $P$ se está congestionando muy rápidamente.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{ECN vs RED \stwo \steo}
+Describir las dos diferencias más importantes entre el método \cd{ECN} y el método \cd{RED} para control de congestión.
+\end{exer}
+
+\begin{exer}
+\section{Ejercicios sobre encabezado IP}
+\subsection{Partición de los enrutadores \sfour \shard}
+Suponer que un \cd{Host A} está conectado a un enrutador $R1$, $R1$ está conectado a otro
+enrutador $R2$, y $R2$ está conectado a un \cd{Host B}.
+
+Suponer que un mensaje TCP que contiene 900 B de datos y 20 B de encabezado TCP es pasado a un código \cd{IP} en el \cd{Host A} para entregar al \cd{Host B}. 
+
+Asumir:
+\begin{itemize}
+\item El enlace $A \mapsto R1$ puede soportar un tamaño máximo de trama de 1024 B incluyendo un encabezado de trama de 14 B
+\item El enlace $R1 \mapsto R2$ puede soportar un tamaño de trama máximo de 512 B incluyendo un encabezado de trama de 8 B
+\item El Enlace $R2 \mapsto B$ puede soportar un tamaño de trama máxima de 512 B incluyendo un encabezado de trama de 12 B.
+\end{itemize}
+
+Mostrar los campos longitud total, identificación, $DF$, $MF$ y desplazamiento de fragmento del encabezado
+\cd{IP} en cada paquete transmitido sobre los 3 enlaces.
+\end{exer}
+
+\begin{exer}
+\subsection{Strict Source Routing \stwo \steo}
+Un datagrama IP que tiene que usar opción strict source routing tiene que ser
+fragmentado.
+
+¿La opción debe ser copiada en cada fragmento, o es suficiente que se la ponga en el primer fragmento? Explique su respuesta.
+\end{exer}
+
+\begin{exer}
+\subsection{Ensamblaje de fragmentos IP \sthree \steo}
+Describa una manera de reensamblar fragmentos IP en el destino.
+\end{exer}
+
+\begin{exer}
+\subsection{IPv4 vs IPv6 \stwo \steo}
+\begin{enumerate}
+\item El campo protocolo usado en el encabezado \cd{IPv4} no está presente en el encabezado fijo \cd{IPv6}. ¿Por qué no?
+\item Compare y contraste los campos de los encabezados de \cd{IPv4} con los de \cd{IPv6}. ¿Tienen
+algunos campos en común?
+\end{enumerate}
+
+\end{exer}
+
+\begin{exer}
+\section{Direcciones IP y CIDR}
+\subsection{Cantidad de host por máscara \sthree}
+Una red en internet tiene una máscara de subred de \cd{255.255.240.0}
+
+¿Cuál es la cantidad máxima de hosts que puede manejar?
+\end{exer}
+
+\begin{exer}
+\subsection{Asignación de IP de organizaciones \sfour \shard}
+Un gran número de direcciones IP consecutivas está disponible a partir de
+\cd{198.16.0.0}.
+
+Suponer que 4 organizaciones $A$, $B$, $C$, y $D$ requieren 4000, 2000, 4000 y 8000
+direcciones respectivamente.
+
+Asignar redes a esas organizaciones siguiendo ese orden.
+Para cada una de las redes dar la primera dirección IP asignada, la última dirección IP asignada y el \bb{prefijo} usando notación \cd{w.x.y.z/s}.
+\end{exer}
+
+\begin{exer}
+\subsection{Agregación de IP \stwo \steo}
+Un enrutador acaba de recibir los siguientes nuevas subredes:
+
+\begin{itemize}
+\item \cd{57.6.96.0/21}
+\item \cd{57.6.104.0/21}
+\item \cd{57.6.112.0/21}
+\item \cd{57.6.120.0/21}
+\end{itemize}
+
+¿Si todas ellas usan la misma línea de salida, pueden ser agregadas? ¿En caso afirmativo, a cuál prefijo? ¿En caso negativo, por qué no?
+\end{exer}
+
+\begin{exer}
+\subsection{Reagregación de IP \sthree \steo}
+El conjunto de direcciones IP desde \cd{29.18.0.0} hasta \cd{19.18.128.255} han sido asignadas
+a \cd{29.18.0.0/17}.
+
+Sin embargo, hay un gap de 1024 direcciones no asignadas desde \cd{29.18.60.0} hasta \cd{29.18.63.255} que son ahora asignadas de repente a un host usando una línea de salida diferente.
+
+¿Es ahora necesario dividir la dirección agregada en sus bloques constitutivos, agregar un nuevo bloque a la tabla y luego ver si alguna reagregación es posible? ¿Sino qué puede ser hecho en lugar de eso?
+\end{exer}
+
+\begin{exer}
+\subsection{Comportamiento de un enrutador CIDR \sthree}
+ Un enrutador tiene las siguientes entradas \cd{(CIDR)} en su tabla de enrutamiento:\\
+ 
+\begin{center}
+\begin{tabular}{| c | c |} 
+ \hline
+ Address/mask & Next Hop \\
+ \hline \hline
+ 135.46.56.0/22 & Interface 0 \\
+ \hline
+ 135.46.60.0/22 & Interface 1 \\
+ \hline
+ 192.53.40.0/23 & Router 1 \\
+ \hline
+ Default & Router 2 \\
+ \hline
+\end{tabular}
+\end{center}
+
+Si llega un paquete con cada una de las siguientes direcciones IP, ¿qué hace el enrutador?
+
+\begin{enumerate}
+\item \cd{135.46.63.10}
+\item \cd{135.46.57.14}
+\item \cd{135.46.52.2}
+\item \cd{192.53.40.7}
+\item \cd{192.53.56.7}
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Enrutamiento de la UNC \sfour}
+Supongamos que la UNC tiene una red donde cada facultad tiene una \cd{LAN} conectada a un enrutador el cual a su vez se conecta a un enrutador principal. Asuma las siguientes subredes para las siguientes facultades:
+
+\begin{itemize}
+\item \cd{10000000 11010000 1XXXXXXX XXXXXXXX} $\leftarrow$ FAMAF
+\item \cd{10000000 11010000 00XXXXXX XXXXXXXX} $\leftarrow$ Medicina
+\item \cd{10000000 11010000 011XXXXX XXXXXXXX} $\leftarrow$ Ciencias Económicas
+\end{itemize}
+
+\begin{enumerate}
+\item Armar la tabla de enrutamiento del enrutador principal de la UNC. Suponiendo que
+por ahora solo existen estas 3 subredes.
+\item Supongamos que un paquete dirigido a \cd{128.208.31.118} llega al enrutador principal. 
+
+¿A cuál facultad se tiene que enviar el paquete?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\section{NAT \sfour}
+Supongamos que una empresa tiene un número de IP \cd{180.20.35.115} y que usa NAT con una red interna de prefijo \cd{192.168.0.0/16}.
+
+Supongamos que por el momento hay solo dos máquinas en la red de la empresa con direcciones IP: \cd{192.168.0.2} y \cd{192.168.0.4}. 
+
+Ahora supongamos que existen las siguientes conexiones TCP:
+
+\begin{itemize}
+\item \cd{(192.168.0.2, 5000)} con \cd{(198.60.42.12, 80)}
+\item \cd{(192.168.0.2, 2000)} con \cd{(194.24.0.5, 110)}
+\item \cd{(192.168.0.4, 5000)} con \cd{(198.60.100.12, 80)}
+\end{itemize}
+
+\begin{enumerate}
+\item Construir la tabla de la caja NAT.
+\item Si sale un mensaje de \cd{(192.168.0.2, 5000)} hacia \cd{(198.60.42.12, 80)}: ¿Cuál es la traducción del
+puerto de origen e IP de origen en ese paquete que hace la caja NAT antes de colocar en internet el paquete?
+\item Si llegara a la caja NAT un mensaje desde \cd{(194.24.0.5, 110)}, ¿qué IP y puerto de origen tiene
+ese mensaje que llega a la caja NAT y a qué valores los traduce la caja NAT a esos campos
+antes de poner el menaje en la red de la empresa?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\section{OSPF y BGP}
+\subsection{Tareas de los enrutadores \stwo \steo}
+\begin{enumerate}
+\item Para OSPF explicar qué tareas realiza un Enrutador de Borde de Area
+\item Para BGP explicar qué tareas realiza un Enrutador BGP (enrutador de borde de sistema autónomo).
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{EBA de OSPF \sthree \steo}
+Responder para OSPF asumiendo que hay más de un EBA conectado a un área $A$:
+\begin{enumerate}
+\item ¿Cómo se decide cuál de esos EBA se va a usar para alcanzar una red del área B (distinta de A)
+desde un enrutador R del área A?
+\item ¿Cómo se decide cuál de esos EBA se va a usar para alcanzar una red del área A desde un EBA
+R de otra área B?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Areas de OSPF \sfour}
+Considerar el sistema autónomo de la figura de abajo; asumir que se trabaja con OSPF.
+
+Los enrutadores $R3$, $R6$, y $R5$ son de borde de área y todos pertenecen a áreas diferentes.
+
+Por simplicidad asumir que cada enlace tiene costo 1 en ambas direcciones.
+
+\addim{net_4}
+
+\begin{enumerate}
+\item Indicar contenido de paquetes de resumen de otras áreas que recibe $R2$.
+\item Construir contenido de avisos de estado de enlace de R3 para enviar a la red dorsal, y a los
+enrutadores $R1$ y $R2$.
+\item Construir el grafo que calcula $R3$ al cuál aplica el algoritmo de Dijkstra.
+\item Hacer lo mismo para $R2$.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Desconocimiento de prefijos \sthree}
+\note{Kurose Cap 5 Ej P14}
+
+Considerar la red que se muestra abajo. 
+
+Suponer:
+\begin{itemize}
+\item \cd{AS3} y \cd{AS2} ejecutan OSPF como su protocolo de enrutamiento \cd{intra-SA}.
+\item \cd{AS1} y \cd{AS4} ejecutan RIP (protocolo parecido al enrutamiento de vector de distancia) como su protocolo de enrutamiento intra-SA donde cada enlace tiene costo 1.
+\item \cd{eBGP} e \cd{iBGP} son usados para el protocolo de enrutamiento \cd{interSA}.
+\item Inicialmente no hay enlace físico entre AS2 y AS4.
+\end{itemize}
+
+\addim{net_5}
+
+Para cada uno de los siguientes enrutadores responder: 
+
+\emph{¿En cuáles protocolos de enrutamiento (OSPF, RIP, eBGP, o iBGP) el enrutador aprende acerca del prefijo $x$?}
+ 
+\begin{enumerate}
+\item Enrutador $3c$
+\item Enrutador $3a$
+\item Enrutador $1c$
+\item Enrutador $1d$
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Entradas de enrutamiento \sthree}
+\note{Kurose Cap 5 Ej P15}
+
+Siguiendo en el escenario del problema anterior, una vez que el enrutador $1d$ aprende acerca de $x$ va a poner una entrada \cd{(x, I)} en su tabla de reenvío. 
+
+\begin{enumerate}
+\item ¿Va a esa entrada tener $I$ igual a $I_1$ o a $I_2$? Explicar el por qué en una oración.
+\item Ahora suponer que hay un enlace físico entre \cd{AS2} y \cd{AS4}. Suponga que el enrutador $1d$ aprende que $x$ es accesible vía \cd{AS2} y vía \cd{AS3}.
+
+¿Va a ser $I$ ser fijada a $I_1$ o a $I_2$? ¿Por qué?
+\item Ahora suponga que hay otro \cd{AS} llamada \cd{AS5}, que yace en el camino entre \cd{AS2} y \cd{AS4}
+(no mostrado en el diagrama). Suponga que el enrutador $1d$ aprende que $x$ es accesible vía
+\cd{AS2 AS5 AS4} así como \cd{AS3 AS4}. ¿Va a ser $I$ fijado a $I_1$ o a $I_2$? ¿Por qué?
+\end{enumerate}
+\end{exer}
 
 %
 %%
@@ -974,6 +1374,161 @@ content
 
 
 \chapter{Capa de Enlace}
+\begin{exer}
+\section{Control de colisiones en redes cableadas}
+\subsection{Máxima cantidad de estaciones \sthree}
+Un grupo de $N$ estaciones comparte un canal \cd{ALOHA} puro de 56 kbps. Cada estación envía una trama de 1000 bits en promedio cada 100 sec, incluso si la previa no ha sido enviada (por ejemplo, las estaciones pueden poner en búfer tramas de salida).
+
+¿Cuál es el máximo valor de $N$?
+\end{exer}
+
+\begin{exer}
+\subsection{Longitud de uan ranura CSMA/CD \sthree}
+Cuál es la longitud de una ranura de contención en CSMA/CD para:
+
+\begin{enumerate}
+\item Un cable de par trenzado de cobre de 2 Km (la velocidad de la propagación de la señal es 82\% de la velocidad de propagación de la señal en el vacío)?
+\item Un cable de fibra óptica multimodo (la velocidad de propagación es el 65\% de la velocidad de propagación de la señal en el vacío).
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Tasa de datos efectiva de red LAN \sthree}
+Una LAN que usa CSMA/CD de 1 Km de largo que opera a 10 Mbps (no es 803.2)
+tiene una velocidad de propagación de 200 $m/\mu s$. Repetidores no son permitidos en este
+Sistema. Tramas de datos son de 265b de largo, incluyendo 32b de encabezado, suma de
+verificación y otra sobrecarga.
+
+La primera ranura de bit luego de una transmisión exitosa es reservada por el receptor para tomar el canal con el fin de enviar un a trama de confirmación de recepción de 32b.
+
+¿Cuál es la tasa de datos efectiva, excluyendo sobrecarga, asumiendo que no hay colisiones?
+\end{exer}
+
+\begin{exer}
+\subsection{Retroceso Exponencial Binario \sthree}
+Dos estaciones CSMA/CD están tratando de transmitir archivos largos de varias tramas. Luego que cada trama es enviada, compiten por el canal, usando algoritmo de \cd{Retroceso Exponencial Binario (REB)}.
+
+¿Cuál es la probabilidad que la contienda termine en la ronda $k$, y cuál es el número promedio de rondas por período de contención?
+\end{exer}
+
+\begin{exer}
+\subsection{Tamaño mínimo de la trama de CSMA/CD \sthree}
+Considere la construcción de una red CSMA/CD que opere a 1 Gbps a través de un
+cable de 1 Km de longitud sin repetidores. La velocidad de la señal en el cable es de 200000 Km/s
+
+¿Cuál es el tamaño mínimo de trama?
+\end{exer}
+
+\begin{exer}
+\subsection{ExerciseName \sone}
+Supongamos que tenemos CSMA/CD como protocolo de subcapa MAC, además asumir que las dos estaciones más alejadas están a 500 m de distancia; no se usan repetidores. 
+
+Además, la velocidad de propagación por el cable es de 200.000 Km/seg. Suponga que la red
+tiene la capacidad de copiar 1000 bits en $\tau$ (el tiempo que tarda un bit en propagarse entre las
+dos estaciones más lejanas).
+
+\begin{enumerate}
+\item Calcular $\tau$.
+\item ¿A qué velocidad de transmisión expresada en bits por segundo se opera en el canal de difusión? Justificar.
+\item ¿Qué tamaño debe tener la trama mínima? Justifique su respuesta. 
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\section{Ethernet y conmutadores}
+\subsection{Comnutador en una estrella \sthree}
+Consideremos la operación de un conmutador aprendiz en el contexto de una red en la cual 6 nodos etiquetados de $A$ a $F$ están conectados a un conmutador Ethernet formando una estrella.
+
+Ocurre en orden:
+\begin{enumerate}
+\item $B$ envía una trama a $E$
+\item $E$ contesta con una trama a $B$
+\item $A$ envía una trama a $B$
+\item $B$ contesta con una trama a $A$.
+\item La tabla del conmutador está inicialmente vacía.
+\end{enumerate}
+
+Muestre el estado de la tabla del conmutador antes y después de cada uno de esos eventos. Para cada uno de esos eventos, identificar los enlaces en los cuales la trama transmitida va a ser enviada, y brevemente justifique sus respuestas.
+\end{exer}
+
+\begin{exer}
+\subsection{Cableado de edificio \stwo}
+Un edificio de oficinas de 7 pisos tiene 15 oficinas adyacentes por piso. Cada oficina contiene un enchufe de pared para la terminal en la pared frontal, de modo que los enchufes forman una grilla triangular en el plano vertical, con una separación de 4 m entre enchufes, ambas horizontales y verticales. Asumiendo que es factible poner un cable recto entre cada par de enchufes, horizontalmente, verticalmente, o diagonalmente
+
+Cuántos metros de cable son necesarios para conectar todos los enchufes usando
+
+\begin{enumerate}
+\item Una configuración estrella con un único enrutador en el medio?
+\item Una LAN clásica 802.3?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Transmisor de Ethernet \stwo \steo}
+Tramas de Ethernet deben tener al menos 64B de largo para asegurar que el transmisor está aun transmitiendo cuando ocurre una colisión en el otro extremo del cable. Ethernet rápida tiene el mismo tamaño mínimo de trama de 64B, pero puede transmitir los bits 10 veces más rápido que Ethernet.
+
+¿Cómo es posible mantener el mismo tamaño de trama mínima?
+\end{exer}
+
+\begin{exer}
+\subsection{Tramas por segundo \stwo}
+Un conmutador ha sido diseñado para usarse con Ethernet rápida y tiene una tarjeta madre que puede transportar 10 Gbps. 
+
+¿Cuántas tramas por Segundo puede manejar en el peor caso?
+\end{exer}
+
+\begin{exer}
+\section{Redes Inalámbricas}
+\subsection{Redes basadas en infraestructura \sthree \steo}
+Para las redes inalámbricas basadas en infraestructura responder:
+
+\begin{enumerate}
+\item ¿Por qué es necesario tener un sistema de distribución?
+\item ¿Qué se entiende por servicio de integración y usando qué tipo de dispositivo se lo
+\end{enumerate}
+puede llevar a cabo?
+\end{exer}
+
+\begin{exer}
+\subsection{Comunicación de estaciones inalámbricas \sthree \steo}
+Considerar 5 estaciones inalámbricas $A$, $B$, $C$, $D$ y $E$.
+
+\begin{itemize}
+\item La estación $A$ puede comunicarse con todas las demás estaciones.
+\item La estación $B$ puede comunicarse con $A$, $C$, y $E$.
+\item La estación $C$ puede comunicarse con $A$, $B$ y $D$.
+\item La estación $D$ puede comunicarse con $A$, $C$ y $E$.
+\item La estación $E$ puede comunicarse con $A$, $D$ y $B$.
+\end{itemize}
+
+\begin{enumerate}
+\item ¿Puede otra comunicación ser posible cuando $A$ está enviando a $B$?
+\item ¿Puede otra comunicación ser posible cuando $B$ está enviando a $A$?
+\item ¿Puede otra comunicación ser posible cuando $B$ está enviando a $C$?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\section{Protocolo 802.11}
+\subsection{Estación expuesta con CTS/RTS \stwo \steo}
+¿Resuelve el problema de la estación expuesta el protocolo de 802.11 que usa CTS/RTS?
+\end{exer}
+
+\begin{exer}
+\subsection{Proximidad de estaciones \sthree}
+En la siguiente figura se muestran 4 estaciones $A$, $B$, $C$ y $D$.
+
+\addim{link_1}
+
+¿Cuál de las últimas dos estaciones está más próxima de $A$ y por qué?
+\end{exer}
+
+\begin{exer}
+\subsection{Pérdida de tramas \sthree}
+Suponer que una LAN 802.11b que opera a 11 Mbps está transmitiendo tramas de 64 bytes una tras otra sobre un canal de radio con una tasa de error de bit de $10^{-7}$. 
+
+¿Cuántas tramas por segundo se van a dañar en promedio?
+\end{exer}
 
 %
 %%
@@ -990,5 +1545,254 @@ content
 
 \chapter{Capa Física}
 
-\end{document}
+\begin{exer}
+\section{Codificación de Señales Digitales}
+\subsection{Tasa de baudios \stwo \steo}
+¿Cuál es la tasa de baudios de la Ethernet clásica de 10-Mbps?
+\end{exer}
 
+\begin{exer}
+\subsection{ExerciseName \sone}
+Bosquejar la codificación de Manchester en la Ethernet clásica para el stream de bits.
+
+$$ \cd{0001110101} $$
+\end{exer}
+
+\begin{exer}
+\section{Tasa máxima de un canal}
+\subsection{Tasa de datos bajo muestreo \sthree}
+Un canal sin ruido de 4 kHz es muestreado cada 1 ms
+
+\begin{enumerate}
+\item ¿Cuál es la máxima tasa de datos?
+\item ¿Cómo cambia la máxima tasa de datos si el canal es ruidoso, con una relación señal a ruido de 30 dB?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Canales de Televisión \sthree}
+Los canales de televisión tienen un ancho de banda de 6 MHz
+
+¿Cuántos bps pueden ser enviados si se usan señales digitales de 4 niveles?
+
+Asumir un canal sin ruido.
+\end{exer}
+
+\begin{exer}
+\subsection{Señal binaria \stwo}
+Si una señal binaria es enviada por un canal de 3 kHz cuya relación señal a ruido es de 20 dB
+
+¿Cuál es la máxima tasa de datos alcanzable?
+\end{exer}
+
+\begin{exer}
+\subsection{Portadora T1 \sthree}
+¿Qué relación señal a ruido se necesita para poner una portadora T1 en una línea de 50 kHz?
+\end{exer}
+
+\begin{exer}
+\section{Medios Guiados}
+\subsection{Streaming de video \stwo}
+Se desea enviar una secuencia de pantallas de computadora sobre una fibra óptica.
+
+La pantalla es de 2560 x 1600 píxeles y cada pixel ocupa 24 bits. Hay 60 imágenes de pantalla por segundo.
+
+Asumir que se puede mandar 1bps por Hz. ¿Cuánto ancho de banda es necesario, y cuántos micrones de longitud de onda son necesarios para esta banda a 1.3 micrones?
+\end{exer}
+
+\begin{exer}
+\subsection{Fibra óptiva vs cable de cobre \stwo \steo}
+¿Cuáles son las ventajas de la fibra óptica sobre el cobre como medio de transmisión?
+
+¿Hay alguna desventaja por usar fibra óptica en lugar de cobre?
+\end{exer}
+
+\begin{exer}
+\subsection{Teorema de Nyquist \stwo \steo}
+¿Es el teorema de Nyquist verdadero para fibra óptica mono modo de alta calidad o solo para cable de cobre?
+\end{exer}
+
+\begin{exer}
+\section{Módems y Codecs}
+\subsection{Diagramas de constelación \sthree}
+El diagrama de constelación de un modem tiene puntos de datos en las siguientes
+coordenadas: 
+
+$$ \cd{(1,1), (1, -1), (-1, 1), (-1, -1)} $$
+
+¿Cuántos bps un modem con esos parámetros alcanzar
+a 1200 símbolos por segundo?
+\end{exer}
+
+\begin{exer}
+\subsection{Tasa de transmisión sin corrección de errores \stwo}
+¿Cuál es la máxima tasa de bits alcanzable por un modem estándar \cd{V.32} si la tasa de baudios es 1200 y no se usa corrección de errores?
+\end{exer}
+
+\begin{exer}
+\subsection{Frecuencias QAM \stwo \steo}
+¿Cuántas frecuencias usa un modem full dúplex \cd{QAM-64}?
+\end{exer}
+
+\begin{exer}
+\subsection{Tiempo de muestreo PCM \stwo \steo}
+¿Por qué el tiempo de muestreo de \cd{PCM} ha sido fijado a 125$\mu s$?
+\end{exer}
+
+\begin{exer}
+\subsection{Tasa máxima de datos sin ruido \sthree}
+Comparar la máxima tasa de datos de un canal sin ruido de 4 kHz usando:
+
+\begin{enumerate}
+\item Codificación analógica (por ejemplo, \cd{QPSk}) con 2 bits por muestra.
+\item El sistema \cd{PCM T1}
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+\subsection{Modulación en un diagrama de constelación \sthree \steo}
+Si en un diagrama de constelación todos los puntos están en un círculo centrado en el origen.
+
+¿Qué tipo de modulación está siendo usada?
+\end{exer}
+
+\begin{exer}
+\subsection{Modulación en base a coordenadas \stwo \steo}
+Un modem con diagrama de constelación tiene los puntos con coordenadas \cd{(0, 1)} y
+\cd{(0, 2)}.
+
+¿Usa el modem modulación de fase o de amplitud?
+\end{exer}
+
+\begin{exer}
+\section{Multiplexación}
+\subsection{Multiplexación de diez señales \sthree}
+Diez señales, cada una requiere 4000 Hz, son multiplexadas en un canal único usando FDM.
+
+¿Cuál es el mínimo ancho de banda requerido para el canal multiplexado?
+
+Asumir que las bandas de guarda son de 400 Hz de ancho. 
+\end{exer}
+
+\begin{exer}
+\subsection{Sobrecarga del T1 \sthree}
+¿Cuál es el porcentaje de sobrecarga en una portadora T1?
+
+O sea, ¿qué porcentaje de los 1,544 Mbps no son entregados al usuario final?
+\end{exer}
+
+\begin{exer}
+\subsection{Secuencias de chips \sone}
+Suponer que $A$, $B$, y $C$ están transmitiendo el bit 0 usando un sistema CDMA con
+las secuencias de chip siguientes.\\
+
+
+\begin{verbatim}
+A = (-1, -1, -1, +1, +1, -1, +1, +1)
+B = (-1, -1, +1, -1, +1, +1, +1, -1)
+C = (-1, +1, -1, +1, +1, +1, -1, -1)
+D = (-1, +1, -1, -1, -1, -1, +1, -1)
+\end{verbatim}
+
+
+¿Cuál es la secuencia de chips resultante?
+\end{exer}
+
+\begin{exer}
+\subsection{Ortogonalidad de la secuencias de chips \sone \steo}
+Considerar una manera diferente de mirar la propiedad de ortogonalidad de secuencias de chips de CDMA.
+
+Cada bit en un par de secuencias puede o no coincidir. Expresar la propiedad de ortogonalidad en términos de coincidencias y falta de coincidencias.
+\end{exer}
+
+\begin{exer}
+\subsection{Decodificación de chips \sthree}
+Un receptor CDMA recibe los siguientes chips:
+
+$$\cd{(-1, +1, -3, +1, -1, -3, +1, +1)}$$
+
+Asumir que la secuencia de chips definida en la figura de abajo:\\
+
+\begin{verbatim}
+A = (-1, -1, -1, +1, +1, -1, +1, +1)
+B = (-1, -1, +1, -1, +1, +1, +1, -1)
+C = (-1, +1, -1, +1, +1, +1, -1, -1)
+D = (-1, +1, -1, -1, -1, -1, +1, -1)
+\end{verbatim}
+
+¿Cuáles estaciones transmitieron, y cuales bits cada una envió?
+\end{exer}
+
+\begin{exer}
+\subsection{Construcción de secuencias de chips \stwo}
+Producir 8 secuencias de chip de largo 8 ortogonales 2 a 2
+\end{exer}
+
+\begin{exer}
+\subsection{Demostración de ortogonalidad \sone \steo \shard}
+Hacer la demostración acerca de la ortogonalidad de secuencias de chips CDMA que dice:
+
+$$ S \cdot T = 0 \implies S \cdot \underline{T} = 0 $$
+\end{exer}
+
+\begin{exer}
+\section{Redes de Celulares}
+\subsection{Reutilización de banda de frecuencias \sthree}
+En un sistema telefónico móvil típico con celdas hexagonales está prohibido reutilizar una banda de frecuencia en una celda adyacente.
+
+Si 840 frecuencias están disponibles, ¿cuántas pueden ser usadas por una celda dada?
+\end{exer}
+
+\begin{exer}
+\subsection{Disposición hexagonal \stwo \steo}
+La disposición actual de las celdas es rara vez tan regular como se muestra en la figura de abajo.
+
+\addim{phy_1}
+
+Dar una razón posible de por qué una celda individual puede tener una forma irregular.
+
+¿Cómo estas formas irregulares afectan la asignación de frecuencias para cada celda?
+\end{exer}
+
+\begin{exer}
+\subsection{Ruptura de señal en movimiento \sone \steo}
+A veces cuando un usuario móvil cruza una frontera de una celda a otra, la llamada
+corriente es abruptamente terminada, aun cuando todos los transmisores y receptores están
+funcionando perfectamente.
+
+¿Por qué?
+\end{exer}
+
+\begin{exer}
+\section{Redes de Cable}
+\subsection{Provisión de internet \stwo}
+Una compañía de cable decide proveer acceso a internet por un cable en un vecindario consistente de 5000 casas.
+
+La compañía usa un cable coaxial y el alojamiento de espectro permite 100 Mbps de bajada por cable. Para atraer clientes la compañía decide garantizar al menos 2 Mbps de bajada para cada casa en todo momento.
+
+Describir qué es lo que la compañía necesita hacer para proveer esta garantía.
+\end{exer}
+
+\begin{exer}
+\subsection{Alojamiento de subida y bajada \sthree}
+Usando el alojamiento de espectro mostrado en la figura de abajo y la información
+dada en el texto
+
+\addim{phy_2}
+
+¿Cuántos Mbps un sistema de cable aloja para subida y cuántos para bajada?
+\end{exer}
+
+\begin{exer}
+\subsection{Red ociosa \sthree}
+¿Cuán rápido puede un usuario de cable recibir datos si la red está ociosa? Asumir
+que la interfaz es:
+
+\begin{enumerate}
+\item 10 Mbps Ethernet
+\item 100 Mbps Ethernet
+\item 54 Mbps Inalámbrica
+\end{enumerate}
+\end{exer}
+
+\end{document}
